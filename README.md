@@ -1,0 +1,1 @@
+# homeassistant-config-v2
