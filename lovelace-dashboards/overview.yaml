@@ -1,0 +1,1421 @@
+button_card_templates:
+  hk_climate:
+    show_label: true
+    state:
+      - icon: 'mdi:power'
+        value: 'off'
+      - icon: 'mdi:fire'
+        styles:
+          card:
+            - background-color: '#61AA16'
+          icon:
+            - color: white
+          label:
+            - color: white
+          name:
+            - color: white
+          state:
+            - color: white
+        value: heat
+      - styles:
+          card:
+            - background-color: '#FAA812'
+          icon:
+            - color: white
+          label:
+            - color: white
+          name:
+            - color: white
+          state:
+            - color: white
+        value: auto
+    template: hk_style_button
+  hk_light:
+    double_tap_action:
+      action: more-info
+    state:
+      - styles:
+          card:
+            - background-color: '#DFDFDF'
+          label:
+            - color: Grey
+            - font-size: 11pt
+          name:
+            - color: black
+          state:
+            - color: Grey
+        value: 'on'
+    state_display: |
+      [[[ 
+        var bri = Math.round(entity.attributes.brightness / 2.55);
+        if (entity.state == "on") return "Lights on at " + bri + "%";
+        else return "Lights are off" 
+      ]]]
+    tap_action:
+      action: toggle
+    template: hk_style_button
+  hk_style_button:
+    aspect_ratio: 1/1
+    show_label: false
+    show_state: true
+    size: 30%
+    state:
+      - styles:
+          card: null
+          icon:
+            - filter: grayscale(100%)
+            - filter: opacity(30%)
+          label:
+            - filter: opacity(30%)
+          name:
+            - filter: opacity(30%)
+          state:
+            - filter: opacity(30%)
+            - color: red
+        value: unavailable
+      - styles:
+          card: null
+          icon:
+            - filter: grayscale(100%)
+            - filter: opacity(30%)
+          label:
+            - filter: opacity(30%)
+          name:
+            - filter: opacity(30%)
+          state:
+            - filter: opacity(30%)
+        value: 'off'
+    styles:
+      card: null
+      icon:
+        - left: 10%
+      label:
+        - position: absolute
+        - top: 30%
+        - right: 10%
+        - font-size: 11pt
+      name:
+        - justify-self: start
+        - margin-left: 10%
+        - font-weight: bold
+      state:
+        - justify-self: start
+        - margin-left: 10%
+        - padding-bottom: 5%
+        - font-size: 10pt
+  hk_switch:
+    double_tap_action:
+      action: more-info
+    state:
+      - styles:
+          card:
+            - background-color: '#DFDFDF'
+          label:
+            - color: Grey
+            - font-size: 11pt
+          name:
+            - color: black
+          state:
+            - color: Grey
+        value: 'on'
+    tap_action:
+      action: toggle
+    template: hk_style_button
+  hk_switch_animated:
+    double_tap_action:
+      action: more-info
+    state:
+      - spin: true
+        styles:
+          card:
+            - background-color: '#DFDFDF'
+          label:
+            - color: Grey
+            - font-size: 11pt
+          name:
+            - color: black
+          state:
+            - color: Grey
+        value: 'on'
+    tap_action:
+      action: toggle
+    template: hk_style_button
+  house_mode_button:
+    aspect_ratio: 2/1
+    show_name: false
+    styles:
+      name:
+        - font-size: 80%
+  large_lightbtn_slider:
+    color: auto
+    double_tap_action: more-info
+    show_label: false
+    show_state: false
+    state:
+      - styles:
+          card: null
+          icon:
+            - filter: grayscale(100%)
+            - filter: opacity(30%)
+        value: 'off'
+      - styles:
+          card:
+            - background-color: '#DFDFDF'
+          name:
+            - color: black
+        value: 'on'
+    styles:
+      card: null
+      custom_fields:
+        slider:
+          - margin: 0% 2%
+          - padding-top: 10px
+      grid:
+        - grid-template-areas: '"i n" "slider slider"'
+        - grid-template-columns: 30% 1fr
+        - grid-template-rows: auto auto
+      icon:
+        - justify-self: start
+      name:
+        - justify-self: start
+        - font-weight: bold
+    type: 'custom:button-card'
+custom_header: {}
+title: House
+views:
+  - badges: []
+    cards:
+      - cards:
+          - cards:
+              - cards:
+                  - color: var--(paper-card-background-color)
+                    color_type: label-card
+                    name: |
+                      [[[ 
+                        var d = new Date();
+                        var time = d.getHours();
+                        if (time < 12) return "Good Morning";
+                        if (time < 18) return "Good Afternoon";
+                        if (time < 24) return "Good Evening";
+                        else return "Hello" 
+                      ]]]
+                    styles:
+                      name:
+                        - justify-self: start
+                        - margin: 0 0 0 10px
+                        - color: var--(primary-text-color)
+                    type: 'custom:button-card'
+                  - card:
+                      aspect_ratio: 4/1
+                      entity: alarm_control_panel.ha_alarm
+                      show_name: false
+                      show_state: true
+                      show_label: true
+                      label: Tap to Disarm
+                      styles:
+                        grid:
+                          - grid-template-areas: '"i s" "i l"'
+                          - grid-template-columns: 1fr 1fr
+                          - grid-template-rows: 1fr auto
+                        label:
+                          - justify-self: start
+                          - font-size: 0.8em
+                        state:
+                          - justify-self: start
+                      state:
+                        - icon: 'mdi:shield-check'
+                          styles:
+                            card: null
+                            icon:
+                              - color: '#0DD58C'
+                            label:
+                              - color: var--(primary-text-color)
+                            name:
+                              - color: var--(primary-text-color)
+                            state:
+                              - color: var--(primary-text-color)
+                          value: disarmed
+                        - icon: 'mdi:shield-key'
+                          styles:
+                            card: null
+                            icon:
+                              - color: var--(primary-text-color)
+                            label:
+                              - color: var--(primary-text-color)
+                            name:
+                              - color: var--(primary-text-color)
+                            state:
+                              - color: var--(primary-text-color)
+                          value: pending
+                        - icon: 'mdi:shield-home'
+                          styles:
+                            card: null
+                            icon:
+                              - color: '#45aaf2'
+                            label:
+                              - color: var--(primary-text-color)
+                            name:
+                              - color: var--(primary-text-color)
+                            state:
+                              - color: var--(primary-text-color)
+                          value: armed_home
+                        - icon: 'mdi:shield-home'
+                          styles:
+                            card: null
+                            icon:
+                              - color: '#40445a'
+                            label:
+                              - color: var--(primary-text-color)
+                            name:
+                              - color: var--(primary-text-color)
+                            state:
+                              - color: var--(primary-text-color)
+                          value: armed_night
+                        - icon: 'mdi:shield-lock'
+                          styles:
+                            card: null
+                            icon:
+                              - color: '#f44336'
+                            label:
+                              - color: var--(primary-text-color)
+                            name:
+                              - color: var--(primary-text-color)
+                            state:
+                              - color: var--(primary-text-color)
+                          value: armed_away
+                        - icon: 'mdi:shield-alert'
+                          styles:
+                            card:
+                              - background-color: '#d50d0d'
+                            icon:
+                              - color: white
+                            label:
+                              - color: var--(primary-text-color)
+                            name:
+                              - color: var--(primary-text-color)
+                            state:
+                              - color: var--(primary-text-color)
+                          value: triggered
+                      state_display: |
+                        [[[ 
+                          if (entity.state == "pending") return "Alarm Pending";
+                          if (entity.state == "disarmed") return "Alarm Disarmed";
+                          if (entity.state == "armed_home") return "Armed Home";
+                          if (entity.state == "armed_away") return "Armed Away";
+                          if (entity.state == "armed_night") return "Armed Night";
+                          if (entity.state == "triggered") return "Alarm Triggered";
+                          else return "Alarm Malfunction" 
+                        ]]]
+                      tap_action:
+                        action: call-service
+                        service: mqtt.publish
+                        service_data:
+                          payload: DISARM
+                          topic: home/alarm/set
+                      type: 'custom:button-card'
+                    conditions:
+                      - entity: alarm_control_panel.ha_alarm
+                        state_not: disarmed
+                    type: conditional
+                  - card:
+                      cards:
+                        - type: conditional
+                          conditions:
+                            - entity: binary_sensor.bedtime
+                              state: 'off'
+                          card:
+                            aspect_ratio: 2/1
+                            color: '#ffeb3b'
+                            color_type: icon
+                            icon: 'mdi:shield-home'
+                            name: Home
+                            show_icon: true
+                            show_name: true
+                            show_state: true
+                            styles:
+                              grid:
+                                - grid-template-areas: '"n i"'
+                                - grid-template-columns: 40% 60%
+                                - grid-template-rows: 1fr
+                              name:
+                                - font-size: 0.8em
+                                - justify-self: end
+                            tap_action:
+                              action: call-service
+                              service: mqtt.publish
+                              service_data:
+                                payload: ARM_HOME
+                                topic: home/alarm/set
+                            type: 'custom:button-card'
+                        - type: conditional
+                          conditions:
+                            - entity: binary_sensor.bedtime
+                              state: 'on'
+                          card:
+                            aspect_ratio: 2/1
+                            color: '#40445a'
+                            color_type: icon
+                            icon: 'mdi:shield-home'
+                            name: Night
+                            show_icon: true
+                            show_name: true
+                            show_state: true
+                            styles:
+                              grid:
+                                - grid-template-areas: '"n i"'
+                                - grid-template-columns: 40% 60%
+                                - grid-template-rows: 1fr
+                              name:
+                                - font-size: 0.8em
+                                - justify-self: end
+                            tap_action:
+                              action: call-service
+                              service: mqtt.publish
+                              service_data:
+                                payload: ARM_NIGHT
+                                topic: home/alarm/set
+                            type: 'custom:button-card'
+                        - aspect_ratio: 2/1
+                          color: '#f44336'
+                          color_type: icon
+                          icon: 'mdi:shield-lock'
+                          name: Away
+                          show_icon: true
+                          show_name: true
+                          show_state: true
+                          styles:
+                            grid:
+                              - grid-template-areas: '"n i"'
+                              - grid-template-columns: 40% 60%
+                              - grid-template-rows: 1fr
+                            name:
+                              - font-size: 0.8em
+                              - justify-self: end
+                          tap_action:
+                            action: call-service
+                            service: mqtt.publish
+                            service_data:
+                              payload: ARM_AWAY
+                              topic: home/alarm/set
+                          type: 'custom:button-card'
+                      type: horizontal-stack
+                    conditions:
+                      - entity: alarm_control_panel.ha_alarm
+                        state: disarmed
+                    type: conditional
+                type: horizontal-stack
+              - backdrop:
+                  night: '#40445a'
+                entity: weather.dark_sky
+                name: ' '
+                styles: null
+                type: 'custom:simple-weather-card'
+            keep:
+              background: keep
+              border_radius: false
+              box_shadow: false
+              margin: false
+              outer_padding: false
+            mode: vertical
+            type: 'custom:stack-in-card'
+          - cards:
+              - conditions:
+                  - entity: light.all_lights
+                    state: 'on'
+                type: conditional
+                card:
+                  entity: light.all_lights
+                  state:
+                    - icon: 'mdi:lightbulb-off'
+                      styles:
+                        card: null
+                        icon:
+                          - filter: grayscale(100%)
+                          - filter: opacity(30%)
+                        label:
+                          - filter: opacity(30%)
+                        name:
+                          - filter: opacity(30%)
+                        state:
+                          - filter: opacity(30%)
+                      value: 'off'
+                    - icon: 'mdi:lightbulb-on'
+                      styles:
+                        card:
+                          - background-color: '#0DD58C'
+                        icon:
+                          - color: white
+                        label:
+                          - color: white
+                        name:
+                          - color: white
+                        state:
+                          - color: white
+                      value: 'on'
+                  template: house_mode_button
+                  type: 'custom:button-card'
+              - color_type: icon
+                icon: 'mdi:home'
+                tap_action:
+                  action: call-service
+                  service: browser_mod.popup
+                  service_data:
+                    card:
+                      cards:
+                        - entity: input_boolean.away_mode
+                          template: hk_switch
+                          type: 'custom:button-card'
+                        - entity: input_boolean.guest_mode
+                          template: hk_switch
+                          type: 'custom:button-card'
+                        - entity: input_boolean.work_from_home_mode
+                          template: hk_switch
+                          type: 'custom:button-card'
+                      type: horizontal-stack
+                    deviceID:
+                      - this
+                    title: Home Modes
+                template: house_mode_button
+                type: 'custom:button-card'
+              - color_type: icon
+                icon: 'mdi:face'
+                state:
+                  - styles:
+                      card: null
+                      icon:
+                        - filter: grayscale(100%)
+                        - filter: opacity(30%)
+                    value: 'off'
+                  - styles:
+                      card:
+                        - background-color: '#0DD58C'
+                      icon:
+                        - color: white
+                      label:
+                        - color: white
+                      name:
+                        - color: white
+                      state:
+                        - color: white
+                    value: 'on'
+                styles:
+                  name:
+                    - font-size: 80%
+                tap_action:
+                  action: call-service
+                  service: browser_mod.popup
+                  service_data:
+                    card:
+                      cards:
+                        - cards:
+                            - aspect_ratio: 2/1
+                              entity: person.dave
+                              layout: name_state
+                              show_name: true
+                              show_state: true
+                              styles:
+                                card: null
+                                icon:
+                                  - width: 80%
+                                  - height: 80%
+                                state:
+                                  - font-size: 85%
+                              tap_action:
+                                action: more-info
+                              type: 'custom:button-card'
+                            - aspect_ratio: 2/1
+                              entity: person.cat
+                              layout: name_state
+                              show_name: true
+                              show_state: true
+                              styles:
+                                card: null
+                                icon:
+                                  - width: 80%
+                                  - height: 80%
+                                state:
+                                  - font-size: 85%
+                              tap_action:
+                                action: more-info
+                              type: 'custom:button-card'
+                          type: horizontal-stack
+                        - entities:
+                            - entity: person.dave
+                            - entity: person.cat
+                          hours_to_show: 72
+                          refresh_interval: 0
+                          type: history-graph
+                        - dark_mode: true
+                          entities:
+                            - entity: person.dave
+                            - entity: person.cat
+                          hours_to_show: 72
+                          type: map
+                      type: vertical-stack
+                    deviceID:
+                      - this
+                    style:
+                      padding: null
+                    title: Person Overview
+                template: house_mode_button
+                type: 'custom:button-card'
+              - card:
+                  entity: input_boolean.bathtime_input
+                  state:
+                    - icon: 'mdi:water-pump-off'
+                      styles:
+                        card: null
+                        icon:
+                          - filter: grayscale(100%)
+                          - filter: opacity(30%)
+                      value: 'off'
+                    - styles:
+                        card:
+                          - background-color: '#0DD58C'
+                        icon:
+                          - color: white
+                        label:
+                          - color: white
+                        name:
+                          - color: white
+                        state:
+                          - color: white
+                      value: 'on'
+                  styles:
+                    name:
+                      - font-size: 80%
+                  template: house_mode_button
+                  type: 'custom:button-card'
+                conditions:
+                  - entity: person.cat
+                    state: home
+                type: conditional
+              - conditions:
+                  - entity: binary_sensor.bedtime
+                    state: 'off'
+                type: conditional
+                card:
+                  entity: input_boolean.toothbrush_time_input
+                  state:
+                    - icon: 'mdi:tooth'
+                      styles:
+                        card: null
+                        icon:
+                          - filter: grayscale(100%)
+                          - filter: opacity(30%)
+                      value: 'off'
+                    - styles:
+                        card:
+                          - background-color: '#0DD58C'
+                        icon:
+                          - color: white
+                        label:
+                          - color: white
+                        name:
+                          - color: white
+                        state:
+                          - color: white
+                      value: 'on'
+                  styles:
+                    name:
+                      - font-size: 80%
+                  template: house_mode_button
+                  type: 'custom:button-card'
+              - card:
+                  icon: 'mdi:youtube-tv'
+                  styles:
+                    card:
+                      - background-color: '#0DD58C'
+                    icon:
+                      - color: white
+                    label:
+                      - color: white
+                    name:
+                      - font-size: 80%
+                      - color: white
+                    state:
+                      - color: white
+                  tap_action:
+                    action: navigate
+                    navigation_path: /lovelace/media
+                  template: house_mode_button
+                  type: 'custom:button-card'
+                conditions:
+                  - entity: binary_sensor.mediaplayer_status
+                    state: 'on'
+                type: conditional
+              - card:
+                  icon: 'mdi:music'
+                  styles:
+                    card:
+                      - background-color: '#0DD58C'
+                    icon:
+                      - color: white
+                    label:
+                      - color: white
+                    name:
+                      - font-size: 80%
+                      - color: white
+                    state:
+                      - color: white
+                  tap_action:
+                    action: navigate
+                    navigation_path: /lovelace/music
+                  template: house_mode_button
+                  type: 'custom:button-card'
+                conditions:
+                  - entity: binary_sensor.mediaplayer_status_music
+                    state_not: 'on'
+                type: conditional
+            type: horizontal-stack
+          - cards:
+              - cards:
+                  - entity: light.lounge
+                    hold_action:
+                      action: navigate
+                      navigation_path: ../lovelace-views/lounge
+                    name: Lounge
+                    template: hk_light
+                    type: 'custom:button-card'
+                  - triggers_update:
+                      - sensor.heating_target_temp
+                    entity: climate.heating
+                    entity_picture: /local/tado_thermostat.svg
+                    label: |
+                      [[[
+                        var temp = states['climate.heating'].attributes.current_temperature;
+                        return '' + (temp ? temp : '0.0') + '°C';
+                      ]]]
+                    name: Heating
+                    show_entity_picture: true
+                    state_display: |
+                      [[[ 
+                        var target_temp = states['sensor.heating_target_temp'].state;
+                        if (entity.state == "auto") return "Auto target " + target_temp + "°C";
+                        if (entity.state == "heat") return "Heating to " + target_temp + "°C";
+                        else return "" 
+                      ]]]
+                    tap_action:
+                      action: more-info
+                    template: hk_climate
+                    type: 'custom:button-card'
+                  - triggers_update:
+                      - sensor.dining_room_temperature
+                    entity: light.dining_room
+                    hold_action:
+                      action: navigate
+                      navigation_path: ../lovelace-views/dining-room
+                    label: |
+                      [[[
+                        var temp = states['sensor.dining_room_temperature'].state;
+                        return '' + (temp ? temp : '0.0') + '°C';
+                      ]]]
+                    name: Dining Room
+                    show_label: true
+                    styles:
+                      label:
+                        - position: absolute
+                        - top: 30%
+                        - right: 15%
+                        - font-size: 11pt
+                    template: hk_light
+                    type: 'custom:button-card'
+                type: horizontal-stack
+              - cards:
+                  - entity: light.nodemcu_01
+                    hold_action:
+                      action: navigate
+                      navigation_path: ../lovelace-views/lounge
+                    name: TV Light
+                    template: hk_switch
+                    type: 'custom:button-card'
+                  - entity: light.master_bedroom
+                    hold_action:
+                      action: navigate
+                      navigation_path: ../lovelace-views/master-bedroom
+                    label: |
+                      [[[
+                        var temp = states['sensor.nodemcu_02_temperature'].state;
+                        return '' + (temp ? temp : '0.0') + '°C';
+                      ]]]
+                    name: Bedroom
+                    show_label: false
+                    template: hk_light
+                    type: 'custom:button-card'
+                  - entity: switch.sonoff2
+                    hold_action:
+                      action: navigate
+                      navigation_path: ../lovelace-views/dining-room
+                    name: Wall Light
+                    template: hk_switch
+                    type: 'custom:button-card'
+                type: horizontal-stack
+              - cards:
+                  - entity: switch.owl_light
+                    hold_action:
+                      action: navigate
+                      navigation_path: ../lovelace-views/girls-room
+                    name: Owl Light
+                    template: hk_switch
+                    type: 'custom:button-card'
+                  - triggers_update:
+                      - sensor.girlsroom_target_temp
+                    entity: climate.girls_room
+                    entity_picture: /local/tado_radiator_horizontal.svg
+                    label: |
+                      [[[
+                        var temp = states['climate.girls_room'].attributes.current_temperature;
+                        return '' + (temp ? temp : '0.0') + '°C';
+                      ]]]
+                    name: Girls Room
+                    show_entity_picture: true
+                    state_display: |
+                      [[[ 
+                        var target_temp = states['sensor.girlsroom_target_temp'].state;
+                        if (entity.state == "auto") return "Auto target " + target_temp + "°C";
+                        if (entity.state == "heat") return "Heating to " + target_temp + "°C";
+                        else return "" 
+                      ]]]
+                    tap_action:
+                      action: more-info
+                    template: hk_climate
+                    type: 'custom:button-card'
+                  - entity: light.spare_room
+                    hold_action:
+                      action: navigate
+                      navigation_path: ../lovelace-views/spare-room
+                    name: Spare Room
+                    template: hk_light
+                    type: 'custom:button-card'
+                type: horizontal-stack
+              - cards:
+                  - entity: light.office
+                    hold_action:
+                      action: navigate
+                      navigation_path: ../lovelace-views/office
+                    name: Office
+                    template: hk_light
+                    type: 'custom:button-card'
+                  - triggers_update:
+                      - sensor.bathroom_sensor_temperature
+                    entity: light.bathroom
+                    hold_action:
+                      action: navigate
+                      navigation_path: ../lovelace-views/bathroom
+                    label: |
+                      [[[
+                        var temp = states['sensor.bathroom_sensor_temperature'].state;
+                        return '' + (temp ? temp : '0.0') + '°C';
+                      ]]]
+                    name: Bathroom
+                    show_label: true
+                    styles:
+                      label:
+                        - position: absolute
+                        - top: 30%
+                        - right: 15%
+                        - font-size: 11pt
+                    template: hk_light
+                    type: 'custom:button-card'
+                  - entity: light.landing
+                    hold_action:
+                      action: navigate
+                      navigation_path: ../lovelace-views/landing
+                    name: Landing
+                    template: hk_light
+                    type: 'custom:button-card'
+                type: horizontal-stack
+              - cards:
+                  - triggers_update:
+                      - binary_sensor.0x00158d000420b592_contact
+                    aspect_ratio: 1/1
+                    custom_fields:
+                      sensor_state: |
+                        [[[
+                          var sensor_state = (states['binary_sensor.0x00158d000420b592_contact'].state);
+                          if (sensor_state == "on") return "Door is open";
+                          else return "Door is closed" 
+                        ]]]
+                    double_tap_action:
+                      action: more-info
+                    entity: light.front_door
+                    hold_action:
+                      action: navigate
+                      navigation_path: ../lovelace-views/front_door
+                    icon: |
+                      [[[ 
+                        var sensor_state = (states['binary_sensor.0x00158d000420b592_contact'].state);
+                        if (sensor_state == "on") 
+                          return "mdi:door-open"; 
+                        else 
+                          return "mdi:door" 
+                      ]]]
+                    name: Front Door
+                    show_label: false
+                    show_state: true
+                    size: 30%
+                    state:
+                      - styles:
+                          card: null
+                          custom_fields:
+                            sensor_state:
+                              - filter: opacity(30%)
+                              - color: red
+                          icon:
+                            - filter: grayscale(100%)
+                            - filter: opacity(30%)
+                          label:
+                            - filter: opacity(30%)
+                          name:
+                            - filter: opacity(30%)
+                          state:
+                            - filter: opacity(30%)
+                            - color: red
+                        value: unavailable
+                      - styles:
+                          card: null
+                          custom_fields:
+                            sensor_state:
+                              - filter: opacity(30%)
+                          icon:
+                            - filter: grayscale(100%)
+                            - filter: opacity(30%)
+                          label:
+                            - filter: opacity(30%)
+                          name:
+                            - filter: opacity(30%)
+                          state:
+                            - filter: opacity(30%)
+                        value: 'off'
+                      - styles:
+                          card:
+                            - background-color: '#DFDFDF'
+                          custom_fields:
+                            sensor_state:
+                              - color: Grey
+                          label:
+                            - color: Grey
+                            - font-size: 11pt
+                          name:
+                            - color: black
+                          state:
+                            - color: Grey
+                        value: 'on'
+                    state_display: |
+                      [[[ 
+                        var bri = Math.round(entity.attributes.brightness / 2.55);
+                        if (entity.state == "on") return "Lights on at " + bri + "%";
+                        else return "Lights are off" 
+                      ]]]
+                    styles:
+                      card: null
+                      custom_fields:
+                        sensor_state:
+                          - justify-self: start
+                          - margin-left: 10%
+                          - padding-bottom: 5%
+                          - font-size: 10pt
+                      grid:
+                        - grid-template-areas: '"i" "n" "s" "sensor_state"'
+                        - grid-template-columns: 1fr
+                        - grid-template-rows: 1fr auto auto auto
+                      icon:
+                        - left: 10%
+                      label:
+                        - position: absolute
+                        - top: 30%
+                        - right: 10%
+                        - font-size: 11pt
+                      name:
+                        - justify-self: start
+                        - margin-left: 10%
+                        - font-weight: bold
+                      state:
+                        - justify-self: start
+                        - margin-left: 10%
+                        - font-size: 10pt
+                    tap_action:
+                      action: toggle
+                    type: 'custom:button-card'
+                  - entity: switch.gaming_pc
+                    template: hk_switch
+                    type: 'custom:button-card'
+                  - entity: switch.homenas
+                    icon: 'mdi:nas'
+                    tap_action:
+                      action: call-service
+                      service: browser_mod.popup
+                      service_data:
+                        card:
+                          cards:
+                            - card: null
+                              entities:
+                                - entities:
+                                    - entity: sensor.glances_free
+                                      name: Free
+                                    - entity: sensor.glances_used
+                                      name: Used
+                                  entity: sensor.glances_used_percent
+                                  name: OS
+                                  state_header: '% Used'
+                                  type: 'custom:multiple-entity-row'
+                                - entities:
+                                    - entity: >-
+                                        sensor.glances_srv_dev_disk_by_label_data_free
+                                      name: Free
+                                    - entity: >-
+                                        sensor.glances_srv_dev_disk_by_label_data_used
+                                      name: Used
+                                  entity: >-
+                                    sensor.glances_srv_dev_disk_by_label_data_used_percent
+                                  name: Data
+                                  state_header: '% Used'
+                                  type: 'custom:multiple-entity-row'
+                                - entities:
+                                    - entity: >-
+                                        sensor.glances_srv_dev_disk_by_label_primaryraid_free
+                                      name: Free
+                                    - entity: >-
+                                        sensor.glances_srv_dev_disk_by_label_primaryraid_used
+                                      name: Used
+                                  entity: >-
+                                    sensor.glances_srv_dev_disk_by_label_primaryraid_used_percent
+                                  name: RAID
+                                  state_header: '% Used'
+                                  type: 'custom:multiple-entity-row'
+                              icon: 'mdi:server'
+                              title: Homenas
+                              type: entities
+                            - align_header: left
+                              align_icon: left
+                              card: null
+                              entities:
+                                - entity: sensor.glances_cpu_used
+                                  name: CPU
+                                - entity: sensor.glances_ram_used_percent
+                                  name: RAM
+                              lower_bound: 0
+                              name: Performance
+                              show:
+                                average: true
+                                extrema: true
+                                fill: false
+                                icon: true
+                                labels: false
+                                name: true
+                                state: true
+                              type: 'custom:mini-graph-card'
+                              upper_bound: 100
+                            - align_header: left
+                              align_icon: left
+                              card: null
+                              entities:
+                                - entity: sensor.glances_core_0_temp
+                                  name: Core Temp
+                              show:
+                                average: true
+                                extrema: true
+                                fill: false
+                                icon: true
+                                labels: true
+                                name: true
+                                state: true
+                              type: 'custom:mini-graph-card'
+                          keep:
+                            background: true
+                            border_radius: false
+                            box_shadow: false
+                            margin: false
+                            outer_padding: false
+                          mode: vertical
+                          type: 'custom:stack-in-card'
+                        deviceID:
+                          - this
+                        title: Homenas Stats
+                    template: hk_switch
+                    type: 'custom:button-card'
+                type: horizontal-stack
+              - cards:
+                  - entity: switch.dyson_cool_fan_power
+                    icon: 'mdi:fan'
+                    name: Dyson Fan
+                    state:
+                      - icon: 'mdi:power'
+                        value: 'off'
+                      - icon: 'mdi:fan'
+                        spin: true
+                        value: 'on'
+                    template: hk_switch_animated
+                    type: 'custom:button-card'
+                  - card:
+                      cards:
+                        - entity: switch.dyson_cool_fan_increase_speed
+                          hold_action:
+                            action: none
+                          icon: 'mdi:plus'
+                          name: Plus
+                          show_icon: true
+                          show_name: false
+                          tap_action:
+                            action: toggle
+                          type: button
+                        - entity: switch.dyson_cool_fan_decrease_speed
+                          hold_action:
+                            action: none
+                          icon: 'mdi:minus'
+                          name: Plus
+                          show_icon: true
+                          show_name: false
+                          tap_action:
+                            action: toggle
+                          type: button
+                      type: vertical-stack
+                    conditions:
+                      - entity: switch.dyson_cool_fan_power
+                        state: 'on'
+                    type: conditional
+                  - color_type: blank-card
+                    type: 'custom:button-card'
+                  - card:
+                      color_type: blank-card
+                      type: 'custom:button-card'
+                    conditions:
+                      - entity: switch.dyson_cool_fan_power
+                        state: 'off'
+                    type: conditional
+                type: horizontal-stack
+            type: vertical-stack
+        type: vertical-stack
+    icon: 'mdi:home'
+    panel: false
+    path: main
+    popup_cards:
+      climate.girls_room:
+        card:
+          cards:
+            - entity: climate.girls_room
+              hide:
+                state: true
+              name: Girls Room Heating
+              sensors:
+                - entity: sensor.girls_room_heating
+                  name: Heating Power
+                - entity: sensor.girls_room_humidity
+                  name: Humidity
+              type: 'custom:simple-thermostat'
+            - entities:
+                - entity: sensor.girls_room_temperature
+                  name: Temperature
+                - entity: sensor.girls_room_humidity
+                  name: Humidity
+                  y_axis: secondary
+                - entity: sensor.girls_room_heating
+                  name: Power
+                  y_axis: secondary
+              icon: 'mdi:radiator'
+              lower_bound_secondary: 0
+              name: Girls Room Heating
+              show:
+                average: true
+                extrema: true
+                fill: fade
+              type: 'custom:mini-graph-card'
+              upper_bound_secondary: 100
+          type: vertical-stack
+        title: Tado Girls Room
+      climate.heating:
+        card:
+          cards:
+            - entity: climate.heating
+              hide:
+                state: true
+              name: Tado Heating
+              sensors:
+                - entity: sensor.heating_heating_2
+                  name: Heating Power
+                - entity: sensor.heating_humidity_2
+                  name: Humidity
+              type: 'custom:simple-thermostat'
+            - entities:
+                - entity: sensor.heating_temperature_2
+                  name: Temperature
+                - entity: sensor.heating_humidity_2
+                  name: Humidity
+                  y_axis: secondary
+                - entity: sensor.heating_heating_2
+                  name: Power
+                  y_axis: secondary
+              icon: 'mdi:radiator'
+              lower_bound_secondary: 0
+              name: Heating
+              show:
+                average: true
+                extrema: true
+                fill: fade
+              type: 'custom:mini-graph-card'
+              upper_bound_secondary: 100
+          type: vertical-stack
+        title: Heating
+    title: Main
+  - badges: []
+    cards:
+      - cards:
+          - card:
+              cards:
+                - artwork: full-cover-fit
+                  entity: media_player.all_speakers
+                  hide:
+                    icon: true
+                    info: false
+                    progress: false
+                    volume: false
+                  idle_view: when_idle
+                  info: scroll
+                  type: 'custom:mini-media-player'
+                - entity: media_player.dining_room_speaker
+                  hide:
+                    controls: true
+                    info: true
+                    progress: true
+                    volume: false
+                  type: 'custom:mini-media-player'
+                - entity: media_player.lounge_speaker
+                  hide:
+                    controls: true
+                    info: true
+                    progress: true
+                    volume: false
+                  type: 'custom:mini-media-player'
+                - entity: media_player.kitchen_speaker
+                  hide:
+                    controls: true
+                    info: true
+                    progress: true
+                    volume: false
+                  type: 'custom:mini-media-player'
+                - entity: media_player.upstairs_speaker
+                  hide:
+                    controls: true
+                    info: true
+                    progress: true
+                    volume: false
+                  type: 'custom:mini-media-player'
+              keep:
+                background: true
+              mode: vertical
+              type: 'custom:stack-in-card'
+            conditions:
+              - entity: media_player.all_speakers
+                state_not: 'off'
+            type: conditional
+          - card:
+              cards:
+                - artwork: full-cover-fit
+                  entity: media_player.downstairs_speakers
+                  hide:
+                    icon: true
+                    info: false
+                    progress: false
+                    volume: false
+                  idle_view: when_idle
+                  info: scroll
+                  type: 'custom:mini-media-player'
+                - entity: media_player.dining_room_speaker
+                  hide:
+                    controls: true
+                    info: true
+                    progress: true
+                    volume: false
+                  type: 'custom:mini-media-player'
+                - entity: media_player.lounge_speaker
+                  hide:
+                    controls: true
+                    info: true
+                    progress: true
+                    volume: false
+                  type: 'custom:mini-media-player'
+                - entity: media_player.kitchen_speaker
+                  hide:
+                    controls: true
+                    info: true
+                    progress: true
+                    volume: false
+                  type: 'custom:mini-media-player'
+                - entity: media_player.upstairs_speaker
+                  hide:
+                    controls: true
+                    info: true
+                    progress: true
+                    volume: false
+                  type: 'custom:mini-media-player'
+              keep:
+                background: true
+              mode: vertical
+              type: 'custom:stack-in-card'
+            conditions:
+              - entity: media_player.downstairs_speakers
+                state_not: 'off'
+            type: conditional
+          - card:
+              artwork: full-cover-fit
+              entity: media_player.dining_room_speaker
+              hide:
+                icon: true
+                info: false
+                progress: false
+                volume: false
+              idle_view: when_idle
+              info: scroll
+              type: 'custom:mini-media-player'
+            conditions:
+              - entity: media_player.all_speakers
+                state: 'off'
+              - entity: media_player.dining_room_speaker
+                state_not: 'off'
+            type: conditional
+          - card:
+              artwork: full-cover-fit
+              entity: media_player.lounge_speaker
+              hide:
+                icon: true
+                info: false
+                progress: false
+                volume: false
+              idle_view: when_idle
+              info: scroll
+              type: 'custom:mini-media-player'
+            conditions:
+              - entity: media_player.all_speakers
+                state: 'off'
+              - entity: media_player.lounge_speaker
+                state_not: 'off'
+            type: conditional
+          - card:
+              artwork: full-cover-fit
+              entity: media_player.kitchen_speaker
+              hide:
+                icon: true
+                info: false
+                progress: false
+                volume: false
+              idle_view: when_idle
+              info: scroll
+              type: 'custom:mini-media-player'
+            conditions:
+              - entity: media_player.all_speakers
+                state: 'off'
+              - entity: media_player.kitchen_speaker
+                state_not: 'off'
+            type: conditional
+          - card:
+              artwork: full-cover-fit
+              entity: media_player.upstairs_speaker
+              hide:
+                icon: true
+                info: false
+                progress: false
+                volume: false
+              idle_view: when_idle
+              info: scroll
+              type: 'custom:mini-media-player'
+            conditions:
+              - entity: media_player.all_speakers
+                state: 'off'
+              - entity: media_player.upstairs_speaker
+                state_not: 'off'
+            type: conditional
+        type: vertical-stack
+    icon: 'mdi:music'
+    path: music
+    title: Music
+  - badges: []
+    cards:
+      - cards:
+          - cards:
+              - entity: switch.harmony_watch_tv
+                icon: 'mdi:television'
+                name: Watch TV
+                template: hk_switch
+                type: 'custom:button-card'
+              - entity: switch.harmony_watch_kodi
+                icon: 'mdi:kodi'
+                name: Watch Kodi
+                template: hk_switch
+                type: 'custom:button-card'
+              - entity: switch.harmony_watch_bluray
+                icon: 'mdi:disc'
+                name: Watch Bluray
+                template: hk_switch
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entity: switch.harmony_steam_link
+                icon: 'mdi:steam'
+                name: Steam Link
+                template: hk_switch
+                type: 'custom:button-card'
+              - entity: switch.harmony_chromecast_audio
+                icon: 'mdi:cast-audio'
+                name: Cast Audio
+                template: hk_switch
+                type: 'custom:button-card'
+              - entity: switch.harmony_chromecast_video
+                icon: 'mdi:cast'
+                name: Cast Video
+                template: hk_switch
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - entity: switch.harmony_aux
+                icon: 'mdi:video-input-component'
+                name: Auxillary
+                template: hk_switch
+                type: 'custom:button-card'
+              - color_type: blank-card
+                type: 'custom:button-card'
+              - color_type: blank-card
+                type: 'custom:button-card'
+            type: horizontal-stack
+          - cards:
+              - artwork: full-cover-fit
+                background: /local/kodi.jpg
+                entity: media_player.kodi_osmc_local
+                group: false
+                hide:
+                  icon: true
+                  name: true
+                  power: true
+                  progress: true
+                  runtime: false
+                  volume: true
+                info: scroll
+                type: 'custom:mini-media-player'
+            type: horizontal-stack
+        type: vertical-stack
+    icon: 'mdi:youtube-tv'
+    path: media
+    title: Media
+  - badges: []
+    cards:
+      - cards:
+          - aspect_ratio: 0%
+            camera_image: camera.camera_bedroom
+            camera_view: live
+            entities: []
+            image: >-
+              https://www.home-assistant.io/images/merchandise/shirt-frontpage.png
+            title: Bedroom Camera
+            type: picture-glance
+          - aspect_ratio: 0%
+            camera_image: camera.camera_diningroom
+            camera_view: live
+            entities: []
+            image: >-
+              https://www.home-assistant.io/images/merchandise/shirt-frontpage.png
+            title: Dining Room Camera
+            type: picture-glance
+        type: vertical-stack
+    icon: 'mdi:cctv'
+    panel: false
+    path: cameras
+    title: Cameras
