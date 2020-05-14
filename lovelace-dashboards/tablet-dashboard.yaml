@@ -1,0 +1,624 @@
+button_card_templates:
+  button_card_templates: null
+  standard_btn_layout:
+    aspect_ratio: 1/1
+    size: 70%
+    styles:
+      grid:
+        - grid-template-areas: '"i l" "n n" "s s" "s2 s2"'
+        - grid-template-columns: 1fr 1fr
+        - grid-template-rows: 1fr auto auto auto
+      card: null
+      icon: null
+      label:
+        - justify-self: start
+      name:
+        - justify-self: start
+        - margin-left: 10%
+        - font-weight: bold
+      state:
+        - justify-self: start
+        - margin-left: 10%
+        - font-size: 10pt
+      custom_fields:
+        s2:
+          - justify-self: start
+          - margin-left: 10%
+          - padding-bottom: 5%
+          - font-size: 10pt
+  standard_btn_states:
+    state:
+      - styles:
+          card: null
+          custom_fields:
+            s2:
+              - filter: opacity(30%)
+              - color: red
+          icon:
+            - filter: grayscale(100%)
+            - filter: opacity(30%)
+          label:
+            - filter: opacity(30%)
+          name:
+            - filter: opacity(30%)
+          state:
+            - filter: opacity(30%)
+            - color: red
+        value: unavailable
+      - styles:
+          card: null
+          custom_fields:
+            s2:
+              - filter: opacity(30%)
+          icon:
+            - filter: grayscale(100%)
+            - filter: opacity(30%)
+          label:
+            - filter: opacity(30%)
+          name:
+            - filter: opacity(30%)
+          state:
+            - filter: opacity(30%)
+        value: 'off'
+  standard_btn_states_on:
+    state:
+      - styles:
+          card:
+            - background-color: '#DFDFDF'
+          custom_fields:
+            s2:
+              - color: Grey
+          label:
+            - color: Grey
+            - font-size: 11pt
+          name:
+            - color: black
+          state:
+            - color: Grey
+        value: 'on'
+  animated_btn_states_on:
+    state:
+      - styles:
+          card:
+            - background-color: '#DFDFDF'
+          custom_fields:
+            s2:
+              - color: Grey
+          label:
+            - color: Grey
+            - font-size: 11pt
+          name:
+            - color: black
+          state:
+            - color: Grey
+        value: 'on'
+        spin: true
+  light_btn:
+    show_label: false
+    show_state: true
+    tap_action:
+      action: toggle
+    double_tap_action:
+      action: more-info
+    state_display: |
+      [[[ 
+        var bri = Math.round(entity.attributes.brightness / 2.55);
+        if (entity.state == "on") return "Lights on at " + bri + "%";
+        else return "Lights are off" 
+      ]]]
+  switch_btn:
+    show_state: true
+    tap_action:
+      action: toggle
+    double_tap_action:
+      action: more-info
+  climate_btn:
+    show_label: true
+    show_state: true
+    tap_action:
+      action: more-info
+  climate_btn_states:
+    state:
+      - styles:
+          card: null
+          icon:
+            - filter: grayscale(100%)
+            - filter: opacity(30%)
+          label:
+            - filter: opacity(30%)
+          name:
+            - filter: opacity(30%)
+          state:
+            - filter: opacity(30%)
+            - color: red
+          custom_fields:
+            s2:
+              - filter: opacity(30%)
+        value: unavailable
+      - styles:
+          card: null
+          icon:
+            - filter: grayscale(100%)
+            - filter: opacity(30%)
+          label:
+            - filter: opacity(30%)
+          name:
+            - filter: opacity(30%)
+          state:
+            - filter: opacity(30%)
+          custom_fields:
+            s2:
+              - filter: opacity(30%)
+        icon: 'mdi:power'
+        value: 'off'
+      - icon: 'mdi:fire'
+        styles:
+          card:
+            - background-color: '#61AA16'
+          icon:
+            - color: white
+          label:
+            - color: white
+          name:
+            - color: white
+          state:
+            - color: white
+          custom_fields:
+            s2:
+              - color: white
+        value: heat
+      - styles:
+          card:
+            - background-color: '#FAA812'
+          icon:
+            - color: white
+          label:
+            - color: white
+          name:
+            - color: white
+          state:
+            - color: white
+          custom_fields:
+            s2:
+              - color: white
+        value: auto
+  weather_btn_layout:
+    aspect_ratio: 1/1
+    size: 70%
+    styles:
+      card:
+        - background-color: |
+            [[[
+              if (states['sun.sun'].state == "below_horizon")
+                return "#40445a";
+              return "#45aaf2";
+            ]]]
+      grid:
+        - grid-template-areas: '"i l" "s s" "n n" "s2 s2"'
+        - grid-template-columns: 1fr 1fr
+        - grid-template-rows: 1fr auto auto auto
+      icon:
+        - color: white
+      label:
+        - justify-self: start
+        - color: white
+      name:
+        - justify-self: start
+        - margin-left: 10%
+        - font-size: 10pt
+        - color: white
+      state:
+        - justify-self: start
+        - margin-left: 10%
+        - font-weight: bold
+        - color: white
+      custom_fields:
+        s2:
+          - justify-self: start
+          - margin-left: 10%
+          - padding-bottom: 5%
+          - font-size: 10pt
+          - color: white
+  weather_btn:
+    show_state: true
+    show_label: true
+    show_name: true
+    tap_action:
+      action: more-info
+    color_type: card
+views:
+  - badges: []
+    cards:
+      - cards:
+          - card:
+              cards:
+                - cards:
+                    - type: conditional
+                      conditions:
+                        - entity: binary_sensor.bedtime
+                          state: 'on'
+                      card:
+                        color: '#40445a'
+                        icon: 'mdi:shield-home'
+                        name: Arm Night
+                        template:
+                          - standard_btn_layout
+                          - standard_btn_states
+                          - standard_btn_states_on
+                          - switch_btn
+                        type: 'custom:button-card'
+                        state_display: Alarm
+                        tap_action:
+                          action: call-service
+                          service: mqtt.publish
+                          service_data:
+                            payload: ARM_NIGHT
+                            topic: home/alarm/set
+                        custom_fields:
+                          s2: '&nbsp'
+                    - type: conditional
+                      conditions:
+                        - entity: binary_sensor.bedtime
+                          state: 'off'
+                      card:
+                        color: '#ffeb3b'
+                        icon: 'mdi:shield-home'
+                        name: Arm Day
+                        template:
+                          - standard_btn_layout
+                          - standard_btn_states
+                          - standard_btn_states_on
+                          - switch_btn
+                        type: 'custom:button-card'
+                        state_display: Alarm
+                        tap_action:
+                          action: call-service
+                          service: mqtt.publish
+                          service_data:
+                            payload: ARM_HOME
+                            topic: home/alarm/set
+                        custom_fields:
+                          s2: '&nbsp'
+                    - color: '#f44336'
+                      icon: 'mdi:shield-lock'
+                      name: Arm Away
+                      template:
+                        - standard_btn_layout
+                        - standard_btn_states
+                        - standard_btn_states_on
+                        - switch_btn
+                      type: 'custom:button-card'
+                      state_display: Alarm
+                      tap_action:
+                        action: call-service
+                        service: mqtt.publish
+                        service_data:
+                          payload: ARM_AWAY
+                          topic: home/alarm/set
+                      custom_fields:
+                        s2: '&nbsp'
+                    - entity: light.lounge
+                      hold_action:
+                        action: navigate
+                        navigation_path: ../lovelace-views/lounge
+                      name: Lounge
+                      template:
+                        - standard_btn_layout
+                        - standard_btn_states
+                        - standard_btn_states_on
+                        - light_btn
+                      type: 'custom:button-card'
+                      custom_fields:
+                        s2: '&nbsp'
+                    - entity: light.nodemcu_01
+                      hold_action:
+                        action: navigate
+                        navigation_path: ../lovelace-views/lounge
+                      name: TV Light
+                      template:
+                        - standard_btn_layout
+                        - standard_btn_states
+                        - standard_btn_states_on
+                        - switch_btn
+                      type: 'custom:button-card'
+                      custom_fields:
+                        s2: '&nbsp'
+                    - triggers_update:
+                        - binary_sensor.0x00158d000420b592_contact
+                      template:
+                        - standard_btn_layout
+                        - standard_btn_states
+                        - standard_btn_states_on
+                        - light_btn
+                      custom_fields:
+                        s2: |
+                          [[[
+                            var sensor_state = (states['binary_sensor.0x00158d000420b592_contact'].state);
+                            if (sensor_state == "on") return "Door is open";
+                            else return "Door is closed" 
+                          ]]]
+                      entity: light.front_door
+                      hold_action:
+                        action: navigate
+                        navigation_path: ../lovelace-views/front_door
+                      icon: |
+                        [[[ 
+                          var sensor_state = (states['binary_sensor.0x00158d000420b592_contact'].state);
+                          if (sensor_state == "on") 
+                            return "mdi:door-open"; 
+                          else 
+                            return "mdi:door" 
+                        ]]]
+                      name: Front Door
+                      type: 'custom:button-card'
+                    - triggers_update:
+                        - sun.sun
+                      template:
+                        - weather_btn_layout
+                        - weather_btn
+                      type: 'custom:button-card'
+                      entity: weather.dark_sky
+                      custom_fields:
+                        s2: |
+                          [[[
+                            return (states['weather.dark_sky'].attributes.forecast[0].precipitation || 0) + ' mm precip';
+                          ]]]
+                      name: |
+                        [[[
+                          return "Next hour " + states['weather.dark_sky'].attributes.forecast[0].temperature + '°C'
+                        ]]]
+                      label: |
+                        [[[
+                          return states['weather.dark_sky'].attributes.temperature + '°C '
+                        ]]]
+                      state:
+                        - value: partlycloudy
+                          icon: |
+                            [[[ 
+                              if (states['sun.sun'].state == "below_horizon")
+                                return "mdi:weather-night-partly-cloudy";
+                                return "mdi:weather-partly-cloudy";
+                            ]]]
+                        - value: clear-night
+                          icon: 'mdi:weather-night'
+                        - value: cloudy
+                          icon: 'mdi:weather-cloudy'
+                        - value: overcast
+                          icon: 'mdi:weather-cloudy-arrow-right'
+                        - value: fog
+                          icon: 'mdi:weather-fog'
+                        - value: hail
+                          icon: 'mdi:weather-hail'
+                        - value: lightning
+                          icon: 'mdi:weather-lightning'
+                        - value: lightning-rainy
+                          icon: 'mdi:weather-lightning-rainy'
+                        - value: partlycloudy
+                          icon: 'mdi:weather-partlycloudy'
+                        - value: pouring
+                          icon: 'mdi:weather-pouring'
+                        - value: rainy
+                          icon: 'mdi:weather-rainy'
+                        - value: snowy
+                          icon: 'mdi:weather-snowy'
+                        - value: snowy-rainy
+                          icon: 'mdi:weather-snowy-rainy'
+                        - value: sunny
+                          icon: 'mdi:weather-sunny'
+                        - value: windy
+                          icon: 'mdi:weather-windy'
+                        - value: windy-variant
+                          icon: 'mdi:weather-windy-variant'
+                  type: horizontal-stack
+                - cards:
+                    - triggers_update:
+                        - sensor.heating_target_temp
+                        - sensor.heating_heating_2
+                      template:
+                        - standard_btn_layout
+                        - climate_btn
+                        - climate_btn_states
+                      custom_fields:
+                        s2: |
+                          [[[
+                            var temp = states['sensor.heating_heating_2'].state;
+                            return 'Heating at ' + temp + '%';
+                          ]]]
+                      entity: climate.heating
+                      entity_picture: /local/tado_thermostat.svg
+                      label: |
+                        [[[
+                          var temp = states['climate.heating'].attributes.current_temperature;
+                          return '' + (temp ? temp : '0.0') + '°C';
+                        ]]]
+                      name: Heating
+                      show_entity_picture: true
+                      state_display: |
+                        [[[ 
+                          var target_temp = states['sensor.heating_target_temp'].state;
+                          if (entity.state == "auto") return "Auto target " + target_temp + "°C";
+                          if (entity.state == "heat") return "Heating to " + target_temp + "°C";
+                          else return "" 
+                        ]]]
+                      type: 'custom:button-card'
+                    - triggers_update:
+                        - sensor.girlsroom_target_temp
+                      entity: climate.girls_room
+                      entity_picture: /local/tado_radiator_horizontal.svg
+                      label: |
+                        [[[
+                          var temp = states['climate.girls_room'].attributes.current_temperature;
+                          return '' + (temp ? temp : '0.0') + '°C';
+                        ]]]
+                      custom_fields:
+                        s2: |
+                          [[[
+                            var temp = states['sensor.girls_room_heating'].state;
+                            return 'Heating at ' + temp + '%';
+                          ]]]
+                      name: Girls Room
+                      show_entity_picture: true
+                      state_display: |
+                        [[[ 
+                          var target_temp = states['sensor.girlsroom_target_temp'].state;
+                          if (entity.state == "auto") return "Auto target " + target_temp + "°C";
+                          if (entity.state == "heat") return "Heating to " + target_temp + "°C";
+                          else return "" 
+                        ]]]
+                      template:
+                        - standard_btn_layout
+                        - climate_btn
+                        - climate_btn_states
+                      type: 'custom:button-card'
+                    - triggers_update:
+                        - sensor.dining_room_temperature
+                      entity: light.dining_room
+                      hold_action:
+                        action: navigate
+                        navigation_path: ../lovelace-views/dining-room
+                      label: |
+                        [[[
+                          var temp = states['sensor.dining_room_temperature'].state;
+                          return '' + (temp ? temp : '0.0') + '°C';
+                        ]]]
+                      name: Dining Room
+                      show_label: true
+                      template:
+                        - standard_btn_layout
+                        - standard_btn_states
+                        - standard_btn_states_on
+                        - light_btn
+                      type: 'custom:button-card'
+                      custom_fields:
+                        s2: '&nbsp'
+                    - entity: switch.sonoff2
+                      hold_action:
+                        action: navigate
+                        navigation_path: ../lovelace-views/dining-room
+                      name: Wall Light
+                      template:
+                        - standard_btn_layout
+                        - standard_btn_states
+                        - standard_btn_states_on
+                        - switch_btn
+                      type: 'custom:button-card'
+                      custom_fields:
+                        s2: '&nbsp'
+                    - entity: light.landing
+                      hold_action:
+                        action: navigate
+                        navigation_path: ../lovelace-views/landing
+                      name: Landing
+                      template:
+                        - standard_btn_layout
+                        - standard_btn_states
+                        - standard_btn_states_on
+                        - light_btn
+                      type: 'custom:button-card'
+                      custom_fields:
+                        s2: '&nbsp'
+                    - color_type: blank-card
+                      type: 'custom:button-card'
+                  type: horizontal-stack
+                - cards:
+                    - entity: light.master_bedroom
+                      hold_action:
+                        action: navigate
+                        navigation_path: ../lovelace-views/master-bedroom
+                      label: |
+                        [[[
+                          var temp = states['sensor.nodemcu_02_temperature'].state;
+                          return '' + (temp ? temp : '0.0') + '°C';
+                        ]]]
+                      name: Bedroom
+                      show_label: false
+                      template:
+                        - standard_btn_layout
+                        - standard_btn_states
+                        - standard_btn_states_on
+                        - light_btn
+                      type: 'custom:button-card'
+                      custom_fields:
+                        s2: '&nbsp'
+                    - entity: switch.owl_light
+                      hold_action:
+                        action: navigate
+                        navigation_path: ../lovelace-views/girls-room
+                      name: Owl Light
+                      template:
+                        - standard_btn_layout
+                        - standard_btn_states
+                        - standard_btn_states_on
+                        - switch_btn
+                      type: 'custom:button-card'
+                      custom_fields:
+                        s2: '&nbsp'
+                    - entity: light.spare_room
+                      hold_action:
+                        action: navigate
+                        navigation_path: ../lovelace-views/spare-room
+                      name: Spare Room
+                      template:
+                        - standard_btn_layout
+                        - standard_btn_states
+                        - standard_btn_states_on
+                        - light_btn
+                      type: 'custom:button-card'
+                      custom_fields:
+                        s2: '&nbsp'
+                    - entity: light.office
+                      hold_action:
+                        action: navigate
+                        navigation_path: ../lovelace-views/office
+                      name: Office
+                      template:
+                        - standard_btn_layout
+                        - standard_btn_states
+                        - standard_btn_states_on
+                        - light_btn
+                      type: 'custom:button-card'
+                      custom_fields:
+                        s2: '&nbsp'
+                    - triggers_update:
+                        - sensor.bathroom_sensor_temperature
+                      entity: light.bathroom
+                      hold_action:
+                        action: navigate
+                        navigation_path: ../lovelace-views/bathroom
+                      label: |
+                        [[[
+                          var temp = states['sensor.bathroom_sensor_temperature'].state;
+                          return '' + (temp ? temp : '0.0') + '°C';
+                        ]]]
+                      name: Bathroom
+                      show_label: true
+                      template:
+                        - standard_btn_layout
+                        - standard_btn_states
+                        - standard_btn_states_on
+                        - light_btn
+                      type: 'custom:button-card'
+                      custom_fields:
+                        s2: '&nbsp'
+                    - color_type: blank-card
+                      type: 'custom:button-card'
+                  type: horizontal-stack
+              type: vertical-stack
+            conditions:
+              - entity: alarm_control_panel.ha_alarm
+                state: disarmed
+            type: conditional
+          - card:
+              entity: alarm_control_panel.ha_alarm
+              name: Alarm
+              states: []
+              type: alarm-panel
+            conditions:
+              - entity: alarm_control_panel.ha_alarm
+                state_not: disarmed
+            type: conditional
+        type: vertical-stack
+    icon: 'mdi:shield'
+    panel: true
+    path: alarm
+    title: Alarm
