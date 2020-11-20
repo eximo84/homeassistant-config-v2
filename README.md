@@ -54,7 +54,7 @@ The following cards are used as part of my LoveLace setup:
  - Video Playback including Harmony Remote activites (WIP)
  - CCTV Playback
 
-![Overview](https://user-images.githubusercontent.com/25502878/81858690-057f9a80-955c-11ea-9cec-608b9db5b5e8.png)
+![Overview](https://user-images.githubusercontent.com/25502878/99859691-b2c91000-2b88-11eb-81e0-13abda1e7a1e.PNG)
 
 ### Views Dashboard:
 
