@@ -1,0 +1,119 @@
+button_card_templates:
+  light_btn:
+    double_tap_action:
+      action: more-info
+    show_label: false
+    show_state: true
+    state_display: |
+      [[[ 
+        var bri = Math.round(entity.attributes.brightness / 2.55);
+        if (entity.state == "on") return "Lights on at " + bri + "%";
+        if (entity.state == "Unavailable") return "Lights are Unavailable";
+        else return "Lights are off" 
+      ]]]
+    tap_action:
+      action: toggle
+  standard_btn_layout:
+    aspect_ratio: 1/1
+    size: 70%
+    styles:
+      card: null
+      custom_fields:
+        s2:
+          - justify-self: start
+          - margin-left: 10%
+          - padding-bottom: 5%
+          - font-size: 10pt
+      grid:
+        - grid-template-areas: '"i l" "n n" "s s" "s2 s2"'
+        - grid-template-columns: 1fr 1fr
+        - grid-template-rows: 1fr auto auto auto
+      icon: null
+      label:
+        - justify-self: start
+      name:
+        - justify-self: start
+        - margin-left: 10%
+        - font-weight: bold
+      state:
+        - justify-self: start
+        - margin-left: 10%
+        - font-size: 10pt
+  standard_btn_states:
+    state:
+      - styles:
+          card:
+            - background-color: red
+          custom_fields:
+            s2:
+              - color: white
+          icon:
+            - color: white
+          label:
+            - color: white
+          name:
+            - color: white
+          state:
+            - color: white
+        value: unavailable
+      - styles:
+          card: null
+          custom_fields:
+            s2: null
+          icon: null
+          label: null
+          name: null
+          state: null
+        value: 'off'
+  standard_btn_states_on:
+    state:
+      - styles:
+          card:
+            - background-color: '#DFDFDF'
+          custom_fields:
+            s2:
+              - color: Grey
+          label:
+            - color: Grey
+            - font-size: 11pt
+          name:
+            - color: '#171717'
+          state:
+            - color: Grey
+        value: 'on'
+title: Light Button
+views:
+  - title: Light Button
+    path: test
+    badges: []
+    cards:
+      - type: grid
+        cards:
+          - custom_fields:
+              s2: |
+                [[[
+                  var sensor_state = (states['binary_sensor.0x00158d00045ee3ea_contact'].state);
+                  if (sensor_state == "on") return "Window is open";
+                  else return "Window is closed" 
+                ]]]
+            entity: light.lounge
+            hold_action:
+              action: navigate
+              navigation_path: ../lovelace-views/lounge
+            icon: |
+              [[[ 
+                var sensor_state = (states['binary_sensor.0x00158d00045ee3ea_contact'].state);
+                if (sensor_state == "on") 
+                  return "mdi:window-open"; 
+                else 
+                  return "mdi:sofa" 
+              ]]]
+            name: Lounge
+            template:
+              - standard_btn_layout
+              - standard_btn_states
+              - standard_btn_states_on
+              - light_btn
+            triggers_update:
+              - binary_sensor.0x00158d00045ee3ea_contact
+            type: 'custom:button-card'
