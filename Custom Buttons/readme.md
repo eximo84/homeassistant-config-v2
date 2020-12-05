@@ -61,6 +61,15 @@ Requires custom component Garbage Collection: https://github.com/bruxy70/Garbage
 * Supports secondary information
 * Icon is animated - example used is a Fan
 
+## Weather Button
+
+![Weather](https://user-images.githubusercontent.com/25502878/101266546-847e2f80-3747-11eb-8755-39dc5d2528c0.PNG)
+
+* Used with DarkSky but any weather should work
+* Background changes colour based on day/night
+* Icons change based on weather - mostly hard coded based on entity state
+* Supports secondary information such as Preciptation
+
 ## Music Playback
 
 ![Music](https://user-images.githubusercontent.com/25502878/101266389-4df3e500-3746-11eb-805c-87c8727a3956.PNG)
