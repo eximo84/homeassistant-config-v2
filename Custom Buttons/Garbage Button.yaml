@@ -1,0 +1,156 @@
+button_card_templates:
+  standard_btn_states:
+    state:
+      - styles:
+          card:
+            - background-color: red
+          custom_fields:
+            s2:
+              - color: white
+          icon:
+            - color: white
+          label:
+            - color: white
+          name:
+            - color: white
+          state:
+            - color: white
+        value: unavailable
+      - styles:
+          card: null
+          custom_fields:
+            s2: null
+          icon: null
+          label: null
+          name: null
+          state: null
+        value: 'off'
+  standard_btn_states_on:
+    state:
+      - styles:
+          card:
+            - background-color: '#DFDFDF'
+          custom_fields:
+            s2:
+              - color: Grey
+          label:
+            - color: Grey
+            - font-size: 11pt
+          name:
+            - color: '#171717'
+          state:
+            - color: Grey
+        value: 'on'
+  standard_btn_layout:
+    aspect_ratio: 1/1
+    size: 70%
+    styles:
+      card: null
+      custom_fields:
+        s2:
+          - justify-self: start
+          - margin-left: 10%
+          - padding-bottom: 5%
+          - font-size: 10pt
+      grid:
+        - grid-template-areas: '"i l" "n n" "s s" "s2 s2"'
+        - grid-template-columns: 1fr 1fr
+        - grid-template-rows: 1fr auto auto auto
+      icon: null
+      label:
+        - justify-self: start
+      name:
+        - justify-self: start
+        - margin-left: 10%
+        - font-weight: bold
+      state:
+        - justify-self: start
+        - margin-left: 10%
+        - font-size: 10pt
+title: Garbage Button
+views:
+  - title: Garbage Button
+    path: test
+    badges: []
+    cards:
+      - type: grid
+        cards:
+          - custom_fields:
+              s2: |
+                [[[
+                  var bbag_state = (states['sensor.black_bag'].state);
+                  var bbag_days = (states['sensor.black_bag'].attributes.days);
+                  var recycle_sensor = (states['sensor.recycling'].state);
+                  var recycle_days = (states['sensor.recycling'].attributes.days);
+                  if (bbag_days => 7) return "Black Bag in " + bbag_days + " Days";
+                  else {
+                    if (recycle_sensor == "0") return "Recycling Today";
+                    else if (recycle_sensor == "1") return "Recycling Tomorrow";
+                    else return "Recycling in " + recycle_days + " Days"; 
+                  }
+                ]]]
+            name: |
+              [[[
+                var bbag_state = (states['sensor.black_bag'].state);
+                var bbag_days = (states['sensor.black_bag'].attributes.days);
+                var recycle_sensor = (states['sensor.recycling'].state);
+                var recycle_days = (states['sensor.recycling'].attributes.days);
+                if ((bbag_days <= 7) && (recycle_sensor == "2" || recycle_sensor == "1")) return "Black Bag";
+                else return "Recycling" 
+              ]]]
+            hold_action:
+              action: navigate
+              navigation_path: ../calendar
+            icon: |
+              [[[ 
+                var bbag_state = (states['sensor.black_bag'].state);
+                var bbag_days = (states['sensor.black_bag'].attributes.days);
+                var recycle_sensor = (states['sensor.recycling'].state);
+                var recycle_days = (states['sensor.recycling'].attributes.days);
+                if ((bbag_days <= 7) && (recycle_sensor == "2" || recycle_sensor == "1"))
+                  return "mdi:trash-can-outline"; 
+                else 
+                  return "mdi:recycle" 
+              ]]]
+            label: |
+              [[[
+                var temp = states['climate.heating'].attributes.current_temperature;
+                return '' + (temp ? temp : '0.0') + '°C';
+              ]]]
+            state_display: |
+              [[[
+                var bbag_state = (states['sensor.black_bag'].state);
+                var bbag_days = (states['sensor.black_bag'].attributes.days);
+                var recycle_sensor = (states['sensor.recycling'].state);
+                var recycle_days = (states['sensor.recycling'].attributes.days);
+                if ((bbag_state == "0") || (recycle_sensor == "0")) return "Collect Today";
+                if ((bbag_state == "1") || (recycle_sensor == "1")) return "Collect Tomorrow";
+                if ((bbag_state == "2") || (recycle_sensor == "2")) {
+                  if (bbag_days <= 7) return "Collect in " + bbag_days + " Days";
+                  else if (recycle_days <= 7) return "Collect in " + recycle_days + " Days";
+                  else return "Unknown"
+                }
+              ]]]
+            show_state: true
+            show_label: false
+            styles:
+              card:
+                - background-color: |
+                    [[[
+                      var bbag_days = (states['sensor.black_bag'].attributes.days);
+                      var recycle_sensor = (states['sensor.recycling'].state);
+                      if ((bbag_days <= 7) && (recycle_sensor == "2" || recycle_sensor == "1"))
+                        return "#212121";
+                      return "#4CAF50";
+                    ]]]
+                - color: white
+              icon:
+                - color: white
+            template:
+              - standard_btn_layout
+              - standard_btn_states
+              - standard_btn_states_on
+            triggers_update:
+              - sensor.garden_waste
+              - sensor.recycling
+            type: 'custom:button-card'
