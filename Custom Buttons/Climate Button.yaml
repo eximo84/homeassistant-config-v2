@@ -1,0 +1,139 @@
+button_card_templates:
+  climate_btn:
+    show_label: true
+    show_state: true
+    tap_action:
+      action: more-info
+  climate_btn_states:
+    state:
+      - styles:
+          card:
+            - background-color: red
+          custom_fields:
+            s2:
+              - color: white
+          icon:
+            - color: white
+          label:
+            - color: white
+          name:
+            - color: white
+          state:
+            - color: white
+        value: unavailable
+      - icon: 'mdi:power'
+        styles:
+          card:
+            - background-color: grey
+          custom_fields:
+            s2:
+              - color: white
+          icon:
+            - color: white
+          label:
+            - color: white
+          name:
+            - color: white
+          state:
+            - color: white
+        value: 'off'
+      - icon: 'mdi:fire'
+        styles:
+          custom_fields:
+            s2:
+              - color: white
+          icon:
+            - color: white
+          label:
+            - color: white
+          name:
+            - color: white
+          state:
+            - color: white
+        value: heat
+      - styles:
+          custom_fields:
+            s2:
+              - color: white
+          icon:
+            - color: white
+          label:
+            - color: white
+          name:
+            - color: white
+          state:
+            - color: white
+        value: auto
+  standard_btn_layout:
+    aspect_ratio: 1/1
+    size: 70%
+    styles:
+      card: null
+      custom_fields:
+        s2:
+          - justify-self: start
+          - margin-left: 10%
+          - padding-bottom: 5%
+          - font-size: 10pt
+      grid:
+        - grid-template-areas: '"i l" "n n" "s s" "s2 s2"'
+        - grid-template-columns: 1fr 1fr
+        - grid-template-rows: 1fr auto auto auto
+      icon: null
+      label:
+        - justify-self: start
+      name:
+        - justify-self: start
+        - margin-left: 10%
+        - font-weight: bold
+      state:
+        - justify-self: start
+        - margin-left: 10%
+        - font-size: 10pt
+title: Climate Button
+views:
+  - title: Climate Button
+    path: test
+    badges: []
+    cards:
+      - type: grid
+        cards:
+          - custom_fields:
+              s2: |
+                [[[
+                  var temp = states['sensor.heating_heating_2'].state;
+                  return 'Heating at ' + temp + '%';
+                ]]]
+            entity: climate.heating
+            entity_picture: /local/tado_thermostat.svg
+            label: |
+              [[[
+                var temp = states['climate.heating'].attributes.current_temperature;
+                return '' + (temp ? temp : '0.0') + '°C';
+              ]]]
+            name: Heating
+            show_entity_picture: true
+            state_display: |
+              [[[ 
+                var target_temp = states['sensor.heating_target_temp'].state;
+                if (entity.state == "auto") return "Auto target " + target_temp + "°C";
+                if (entity.state == "heat") return "Heating to " + target_temp + "°C";
+                else return "" 
+              ]]]
+            styles:
+              card:
+                - background-color: |
+                    [[[
+                      var target_temp = states['sensor.heating_target_temp'].state;
+                      if (target_temp <= 18.0) return '#32B76F';
+                      if (target_temp => 18.1) return '#FFC80F';
+                      if (target_temp => 20.0) return '#FF7309';
+                    ]]]
+            template:
+              - standard_btn_layout
+              - climate_btn
+              - climate_btn_states
+            triggers_update:
+              - sensor.heating_target_temp
+              - sensor.heating_heating_2
+            type: 'custom:button-card'
