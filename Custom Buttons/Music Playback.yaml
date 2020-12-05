@@ -1,0 +1,45 @@
+aspect_ratio: 1/1
+variables:
+  active_speaker: |
+    [[[ 
+      return (states['input_text.active_speaker'].state) 
+    ]]]
+custom_fields:
+  media_state: |
+    [[[
+      var active_speaker_state = (states[variables.active_speaker].state);
+      if (active_speaker_state === 'paused') return `<ha-icon icon="mdi:play"></ha-icon>`;   
+      else if (active_speaker_state === 'playing') return  `<ha-icon icon="mdi:pause"></ha-icon>`; 
+      else return;
+    ]]]
+entity_picture: '[[[ return (states[variables.active_speaker].attributes.entity_picture); ]]]'
+icon: 'mdi:music'
+show_entity_picture: true
+show_name: false
+show_state: false
+styles:
+  card:
+    - padding: 0px
+  grid:
+    - grid-template-areas: '"i" "media_state"'
+    - grid-template-rows: 100%
+    - grid-template-columns: 100%
+  entity_picture:
+    - align-items: center
+    - justify-content: center
+    - width: 100%
+    - opacity: 0.9
+    - transform: scale(1.8)
+  custom_fields:
+    media_state:
+      - color: white
+      - opacity: 0.7
+      - margin-top: '-100%'
+      - transform: scale(0.75)
+tap_action:
+  action: call-service
+  service: media_player.media_play_pause
+  service_data:
+    entity_id: '[[[ return variables.active_speaker ]]]'
+type: 'custom:button-card'
+triggers_update: all
