@@ -1,0 +1,111 @@
+button_card_templates:
+  weather_btn:
+    color_type: card
+    show_label: true
+    show_name: true
+    show_state: true
+    tap_action:
+      action: more-info
+  weather_btn_layout:
+    aspect_ratio: 1/1
+    size: 70%
+    styles:
+      card:
+        - background-color: |
+            [[[
+              if (states['sun.sun'].state == "below_horizon")
+                return "#40445a";
+              return "#45aaf2";
+            ]]]
+      custom_fields:
+        s2:
+          - justify-self: start
+          - margin-left: 10%
+          - padding-bottom: 5%
+          - font-size: 10pt
+          - color: white
+      grid:
+        - grid-template-areas: '"i l" "s s" "n n" "s2 s2"'
+        - grid-template-columns: 1fr 1fr
+        - grid-template-rows: 1fr auto auto auto
+      icon:
+        - color: white
+      label:
+        - justify-self: start
+        - color: white
+      name:
+        - justify-self: start
+        - margin-left: 10%
+        - font-size: 10pt
+        - color: white
+      state:
+        - justify-self: start
+        - margin-left: 10%
+        - font-weight: bold
+        - color: white
+title: Weather Button
+views:
+  - title: Weather Button
+    path: test
+    badges: []
+    cards:
+      - type: grid
+        cards:
+          - custom_fields:
+              s2: |
+                [[[
+                  return (states['weather.dark_sky'].attributes.forecast[0].precipitation || 0) + ' mm precip';
+                ]]]
+            entity: weather.dark_sky
+            label: |
+              [[[
+                return states['weather.dark_sky'].attributes.temperature + '°C '
+              ]]]
+            name: |
+              [[[
+                return "Next hour " + states['weather.dark_sky'].attributes.forecast[0].temperature + '°C'
+              ]]]
+            state:
+              - icon: |
+                  [[[ 
+                    if (states['sun.sun'].state == "below_horizon")
+                      return "mdi:weather-night-partly-cloudy";
+                      return "mdi:weather-partly-cloudy";
+                  ]]]
+                value: partlycloudy
+              - icon: 'mdi:weather-night'
+                value: clear-night
+              - icon: 'mdi:weather-cloudy'
+                value: cloudy
+              - icon: 'mdi:weather-cloudy-arrow-right'
+                value: overcast
+              - icon: 'mdi:weather-fog'
+                value: fog
+              - icon: 'mdi:weather-hail'
+                value: hail
+              - icon: 'mdi:weather-lightning'
+                value: lightning
+              - icon: 'mdi:weather-lightning-rainy'
+                value: lightning-rainy
+              - icon: 'mdi:weather-partlycloudy'
+                value: partlycloudy
+              - icon: 'mdi:weather-pouring'
+                value: pouring
+              - icon: 'mdi:weather-rainy'
+                value: rainy
+              - icon: 'mdi:weather-snowy'
+                value: snowy
+              - icon: 'mdi:weather-snowy-rainy'
+                value: snowy-rainy
+              - icon: 'mdi:weather-sunny'
+                value: sunny
+              - icon: 'mdi:weather-windy'
+                value: windy
+              - icon: 'mdi:weather-windy-variant'
+                value: windy-variant
+            template:
+              - weather_btn_layout
+              - weather_btn
+            triggers_update:
+              - sun.sun
+            type: 'custom:button-card'
