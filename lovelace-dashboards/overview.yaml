@@ -320,7 +320,7 @@ button_card_templates:
     tap_action:
       action: toggle
 custom_header: {}
-title: Chapel House
+title: House
 views:
   - badges: []
     cards:
@@ -632,20 +632,52 @@ views:
                       navigation_path: /lovelace/media
                     template: quick_toggle_btn
                     type: 'custom:button-card'
-                  - entity: media_player.dining_room_speaker
+                  - aspect_ratio: 1/1
+                    variables:
+                      active_speaker: |
+                        [[[ 
+                          return (states['input_text.active_speaker'].state) 
+                        ]]]
+                    custom_fields:
+                      media_state: |
+                        [[[
+                          var active_speaker_state = (states[variables.active_speaker].state);
+                          if (active_speaker_state === 'paused') return `<ha-icon icon="mdi:play"></ha-icon>`;   
+                          else if (active_speaker_state === 'playing') return  `<ha-icon icon="mdi:pause"></ha-icon>`; 
+                          else return;
+                        ]]]
+                    entity_picture: >-
+                      [[[ return
+                      (states[variables.active_speaker].attributes.entity_picture);
+                      ]]]
                     icon: 'mdi:music'
                     show_entity_picture: true
                     show_name: false
                     show_state: false
                     styles:
+                      card:
+                        - padding: 0px
+                      grid:
+                        - grid-template-areas: '"i" "media_state"'
+                        - grid-template-rows: 100%
+                        - grid-template-columns: 100%
                       entity_picture:
+                        - align-items: center
+                        - justify-content: center
                         - width: 100%
-                        - transform: scale(1.5)
+                        - opacity: 0.8
+                        - transform: scale(1.8)
+                      custom_fields:
+                        media_state:
+                          - color: white
+                          - opacity: 0.7
+                          - margin-top: '-100%'
+                          - transform: scale(0.5)
                     tap_action:
                       action: navigate
                       navigation_path: /lovelace/music
-                    template: quick_toggle_btn
                     type: 'custom:button-card'
+                    triggers_update: all
           - backdrop:
               night: '#40445a'
             entity: weather.dark_sky
@@ -1332,105 +1364,160 @@ views:
     title: Main
   - badges: []
     cards:
-      - cards:
-          - card:
+      - type: 'custom:stack-in-card'
+        mode: vertical
+        keep:
+          background: true
+        cards:
+          - aspect_ratio: 1/1
+            variables:
+              active_speaker: |
+                [[[ 
+                  return (states['input_text.active_speaker'].state) 
+                ]]]
+            custom_fields:
+              media_state: |
+                [[[
+                  var active_speaker_state = (states[variables.active_speaker].state);
+                  if (active_speaker_state === 'paused') return `<ha-icon icon="mdi:play"></ha-icon>`;   
+                  else if (active_speaker_state === 'playing') return  `<ha-icon icon="mdi:pause"></ha-icon>`; 
+                  else return;
+                ]]]
+            entity_picture: >-
+              [[[ return
+              (states[variables.active_speaker].attributes.entity_picture); ]]]
+            icon: 'mdi:music'
+            show_entity_picture: true
+            show_name: false
+            show_state: false
+            styles:
+              card:
+                - padding: 0px
+              grid:
+                - grid-template-areas: '"i" "media_state"'
+                - grid-template-rows: 100%
+                - grid-template-columns: 100%
+              entity_picture:
+                - align-items: center
+                - justify-content: center
+                - width: 100%
+                - opacity: 0.9
+                - transform: scale(1.8)
+              custom_fields:
+                media_state:
+                  - color: white
+                  - opacity: 0.7
+                  - margin-top: '-100%'
+                  - transform: scale(0.75)
+            tap_action:
+              action: call-service
+              service: media_player.media_play_pause
+              service_data:
+                entity_id: '[[[ return variables.active_speaker ]]]'
+            type: 'custom:button-card'
+            triggers_update: all
+          - type: conditional
+            conditions:
+              - entity: media_player.all_speakers
+                state_not: 'off'
+              - entity: media_player.downstairs_speakers
+                state: 'off'
+            card:
+              type: vertical-stack
               cards:
-                - artwork: full-cover-fit
+                - type: 'custom:mini-media-player'
                   entity: media_player.all_speakers
                   hide:
                     icon: true
                     info: false
-                    progress: false
+                    progress: true
                     volume: false
                   idle_view: when_idle
                   info: scroll
-                  type: 'custom:mini-media-player'
-                - entity: media_player.dining_room_speaker
+                - type: 'custom:mini-media-player'
+                  entity: media_player.dining_room_speaker
                   hide:
+                    icon: true
                     controls: true
                     info: true
                     progress: true
                     volume: false
-                  type: 'custom:mini-media-player'
-                - entity: media_player.lounge_speaker
+                - type: 'custom:mini-media-player'
+                  entity: media_player.lounge_speaker
                   hide:
+                    icon: true
                     controls: true
                     info: true
                     progress: true
                     volume: false
-                  type: 'custom:mini-media-player'
-                - entity: media_player.kitchen_speaker
+                - type: 'custom:mini-media-player'
+                  entity: media_player.kitchen_speaker
                   hide:
+                    icon: true
                     controls: true
                     info: true
                     progress: true
                     volume: false
-                  type: 'custom:mini-media-player'
-                - entity: media_player.upstairs_speaker
+                - type: 'custom:mini-media-player'
+                  entity: media_player.upstairs_speaker
                   hide:
+                    icon: true
                     controls: true
                     info: true
                     progress: true
                     volume: false
-                  type: 'custom:mini-media-player'
-              keep:
-                background: true
-              mode: vertical
-              type: 'custom:stack-in-card'
+          - type: conditional
             conditions:
               - entity: media_player.all_speakers
+                state: 'off'
+              - entity: media_player.downstairs_speakers
                 state_not: 'off'
-            type: conditional
-          - card:
+            card:
+              type: vertical-stack
               cards:
-                - artwork: full-cover-fit
+                - type: 'custom:mini-media-player'
                   entity: media_player.downstairs_speakers
                   hide:
                     icon: true
                     info: false
-                    progress: false
+                    progress: true
                     volume: false
                   idle_view: when_idle
                   info: scroll
-                  type: 'custom:mini-media-player'
-                - entity: media_player.dining_room_speaker
+                - type: 'custom:mini-media-player'
+                  entity: media_player.dining_room_speaker
                   hide:
+                    icon: true
                     controls: true
                     info: true
                     progress: true
                     volume: false
-                  type: 'custom:mini-media-player'
-                - entity: media_player.lounge_speaker
+                - type: 'custom:mini-media-player'
+                  entity: media_player.lounge_speaker
                   hide:
+                    icon: true
                     controls: true
                     info: true
                     progress: true
                     volume: false
-                  type: 'custom:mini-media-player'
-                - entity: media_player.kitchen_speaker
+                - type: 'custom:mini-media-player'
+                  entity: media_player.kitchen_speaker
                   hide:
+                    icon: true
                     controls: true
                     info: true
                     progress: true
                     volume: false
-                  type: 'custom:mini-media-player'
-                - entity: media_player.upstairs_speaker
-                  hide:
-                    controls: true
-                    info: true
-                    progress: true
-                    volume: false
-                  type: 'custom:mini-media-player'
-              keep:
-                background: true
-              mode: vertical
-              type: 'custom:stack-in-card'
+          - type: conditional
             conditions:
-              - entity: media_player.downstairs_speakers
+              - entity: media_player.dining_room_speaker
                 state_not: 'off'
-            type: conditional
-          - card:
-              artwork: full-cover-fit
+              - entity: media_player.all_speakers
+                state: 'off'
+              - entity: media_player.downstairs_speakers
+                state: 'off'
+            card:
+              type: 'custom:mini-media-player'
               entity: media_player.dining_room_speaker
               hide:
                 icon: true
@@ -1439,15 +1526,16 @@ views:
                 volume: false
               idle_view: when_idle
               info: scroll
-              type: 'custom:mini-media-player'
+          - type: conditional
             conditions:
+              - entity: media_player.lounge_speaker
+                state_not: 'off'
               - entity: media_player.all_speakers
                 state: 'off'
-              - entity: media_player.dining_room_speaker
-                state_not: 'off'
-            type: conditional
-          - card:
-              artwork: full-cover-fit
+              - entity: media_player.downstairs_speakers
+                state: 'off'
+            card:
+              type: 'custom:mini-media-player'
               entity: media_player.lounge_speaker
               hide:
                 icon: true
@@ -1456,15 +1544,16 @@ views:
                 volume: false
               idle_view: when_idle
               info: scroll
-              type: 'custom:mini-media-player'
+          - type: conditional
             conditions:
+              - entity: media_player.kitchen_speaker
+                state_not: 'off'
               - entity: media_player.all_speakers
                 state: 'off'
-              - entity: media_player.lounge_speaker
-                state_not: 'off'
-            type: conditional
-          - card:
-              artwork: full-cover-fit
+              - entity: media_player.downstairs_speakers
+                state: 'off'
+            card:
+              type: 'custom:mini-media-player'
               entity: media_player.kitchen_speaker
               hide:
                 icon: true
@@ -1473,15 +1562,16 @@ views:
                 volume: false
               idle_view: when_idle
               info: scroll
-              type: 'custom:mini-media-player'
+          - type: conditional
             conditions:
+              - entity: media_player.upstairs_speaker
+                state_not: 'off'
               - entity: media_player.all_speakers
                 state: 'off'
-              - entity: media_player.kitchen_speaker
-                state_not: 'off'
-            type: conditional
-          - card:
-              artwork: full-cover-fit
+              - entity: media_player.downstairs_speakers
+                state: 'off'
+            card:
+              type: 'custom:mini-media-player'
               entity: media_player.upstairs_speaker
               hide:
                 icon: true
@@ -1490,14 +1580,6 @@ views:
                 volume: false
               idle_view: when_idle
               info: scroll
-              type: 'custom:mini-media-player'
-            conditions:
-              - entity: media_player.all_speakers
-                state: 'off'
-              - entity: media_player.upstairs_speaker
-                state_not: 'off'
-            type: conditional
-        type: vertical-stack
     icon: 'mdi:music'
     path: music
     title: Music
