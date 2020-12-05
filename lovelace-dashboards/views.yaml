@@ -107,6 +107,25 @@ button_card_templates:
         -0.085,-0.516 -0.085,-0.805c0,-3.168 3.147,-6.5 7,-6.5Z"
         style="fill:var(--button-card-light-color)"/></svg>
     template: view_light_button_style
+  view_hue_white_gu10:
+    custom_fields:
+      icon_hue: >
+        <svg viewBox="6 0 32 32"><path id="Bulb" d="M8.215,10.087c2.168,0.92
+        5.474,1.219 7.785,1.219c2.312,-0 5.617,-0.299 7.785,-1.219c-0.328,1.919
+        -1.137,4.545 -3.561,6.294c-0.203,0.187 -0.224,0.5
+        -0.224,1.125l-0,3.686c-0,0.477 -0.153,0.946 -0.466,1.3c-0.5,0.567
+        -1.575,1 -3.534,1c-1.959,-0 -3.034,-0.433 -3.534,-1c-0.313,-0.354
+        -0.466,-0.823 -0.466,-1.3l-0,-3.686c-0,-0.625 -0.02,-0.938
+        -0.223,-1.125c-2.424,-1.749 -3.234,-4.375
+        -3.562,-6.294Zm8.785,15.913l0,-1.542c0.894,-0.083 1.548,-0.274
+        2,-0.533l0,2.075c0,0.55 -0.45,1 -1,1c-0.55,0 -1,-0.45
+        -1,-1Zm-4,0l0,-2.075c0.452,0.259 1.106,0.45 2,0.533l0,1.542c0,0.55
+        -0.45,1 -1,1c-0.55,0 -1,-0.45 -1,-1Z" style="fill:#C0C0C0;"/><path
+        id="Light" d="M16,5c4.97,0 9,1.188 9,2.653c0,1.464 -4.03,2.653
+        -9,2.653c-4.97,-0 -9,-1.189 -9,-2.653c0,-0.18 0.06,-0.361
+        0.18,-0.531c0.83,-1.21 4.47,-2.122 8.82,-2.122Z"
+        style="fill:var(--button-card-light-color)"/></svg>
+    template: view_light_button_style
   view_light_button_style:
     aspect_ratio: 1/1.25
     color: auto
@@ -117,6 +136,7 @@ button_card_templates:
       ]]]
     show_label: false
     show_state: true
+    show_last_changed: true
     state:
       - styles:
           card: null
@@ -136,13 +156,13 @@ button_card_templates:
       card: null
       custom_fields:
         power_icon:
-          - justify-self: center
-          - padding-right: 0%
+          - justify-self: right
+          - padding-right: 10%
         slider:
           - margin-right: 3%
       grid:
-        - grid-template-areas: '"n power_icon" "icon_hue ." "s ." "slider slider"'
-        - grid-template-columns: 1fr 30%
+        - grid-template-areas: '"n power_icon" "icon_hue ." "s ." "l ." "slider slider"'
+        - grid-template-columns: 60% 40%
         - grid-template-rows: auto auto auto auto
       icon:
         - justify-self: start
@@ -155,6 +175,10 @@ button_card_templates:
         - justify-self: start
         - margin-left: 10%
         - padding: 10% 0% 5% 0%
+      label:
+        - justify-self: start
+        - margin-left: 10%
+        - padding: 0% 0% 5% 0%
     tap_action:
       action: more-info
   view_lightgroup_button_style:
@@ -221,15 +245,44 @@ button_card_templates:
           icon:
             - color: white
         value: 'on'
+      - styles:
+          card:
+            - background-color: red
+          icon:
+            - color: white
+        value: unavailable
     styles:
       card:
         - width: 45px
         - height: 45px
+  view_sensor_button:
+    aspect_ratio: 1.65/1
+    show_last_changed: true
+    show_state: true
+    styles:
+      grid:
+        - grid-template-areas: '"i n" "i s" "i l" '
+        - grid-template-columns: 1fr 1fr
+        - grid-template-rows: auto auto auto
+      icon:
+        - width: 65%
+      label:
+        - justify-self: start
+        - font-size: 0.8em
+        - padding-bottom: 25%
+      name:
+        - justify-self: start
+        - padding-top: 25%
+      state:
+        - justify-self: start
+        - font-size: 0.8em
+    type: 'custom:button-card'
   view_switch_button_style:
     aspect_ratio: 1/1.25
     color: auto
     show_label: false
     show_state: true
+    show_last_changed: true
     size: 140px
     state:
       - styles:
@@ -250,13 +303,13 @@ button_card_templates:
       card: null
       custom_fields:
         power_icon:
-          - justify-self: center
-          - padding-right: 0%
+          - justify-self: right
+          - padding-right: 10%
         slider:
           - margin-right: 3%
       grid:
-        - grid-template-areas: '"n power_icon" "i ." "s ." "slider slider"'
-        - grid-template-columns: 1fr 30%
+        - grid-template-areas: '"n power_icon" "i ." "s ." "l ." "slider slider"'
+        - grid-template-columns: 60% 40%
         - grid-template-rows: auto 160px auto auto
       icon:
         - justify-self: start
@@ -268,6 +321,10 @@ button_card_templates:
         - justify-self: start
         - margin-left: 10%
         - padding: 10% 0% 5% 0%
+      label:
+        - justify-self: start
+        - margin-left: 10%
+        - padding: 0% 0% 5% 0%
     tap_action:
       action: more-info
 title: Views
@@ -291,7 +348,9 @@ views:
             name: Lounge Lights
             template: view_lightgroup_button_style
             type: 'custom:button-card'
-          - cards:
+          - type: grid
+            columns: 2
+            cards:
               - custom_fields:
                   power_icon:
                     card:
@@ -323,21 +382,19 @@ views:
                 name: Side Light
                 template: view_hue_color_bulb
                 type: 'custom:button-card'
-            type: horizontal-stack
-          - cards:
               - custom_fields:
                   power_icon:
                     card:
-                      entity: light.nodemcu_01
+                      entity: light.wled
                       template: view_power_icon_style
                       type: 'custom:button-card'
                   slider:
                     card:
-                      entity: light.nodemcu_01
+                      entity: light.wled
                       full_row: true
                       toggle: false
                       type: 'custom:slider-entity-row'
-                entity: light.nodemcu_01
+                entity: light.wled
                 template: view_hue_led
                 type: 'custom:button-card'
               - align_state: right
@@ -365,19 +422,22 @@ views:
                   name: false
                 type: 'custom:mini-graph-card'
                 upper_bound_secondary: 100
-            type: horizontal-stack
-          - cards:
-              - cards:
-                  - template: view_back_button
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                type: horizontal-stack
-            type: horizontal-stack
+              - entity: binary_sensor.0x00158d00045ee3ea_contact
+                name: Window
+                template:
+                  - view_sensor_button
+                type: 'custom:button-card'
+          - type: entities
+            entities:
+              - entity: automation.kodi_movie_lights_playing
+              - entity: automation.kodi_movie_lights_paused
+              - entity: switch.wled_lor
+            title: Kodi
+          - type: grid
+            columns: 4
+            cards:
+              - template: view_back_button
+                type: 'custom:button-card'
         type: vertical-stack
     icon: 'mdi:sofa'
     path: lounge
@@ -401,7 +461,9 @@ views:
             name: Dining Room Lights
             template: view_lightgroup_button_style
             type: 'custom:button-card'
-          - cards:
+          - type: grid
+            columns: 2
+            cards:
               - custom_fields:
                   power_icon:
                     card:
@@ -433,8 +495,6 @@ views:
                 name: Uplight
                 template: view_hue_white_bulb
                 type: 'custom:button-card'
-            type: horizontal-stack
-          - cards:
               - custom_fields:
                   power_icon:
                     card:
@@ -447,14 +507,14 @@ views:
               - align_state: right
                 decimals: 1
                 entities:
-                  - entity: sensor.dining_room_temperature
+                  - entity: sensor.esp_dev_03_am2302_temperature
                     name: Temp
                     unit: °C
-                  - entity: sensor.dining_room_humidity
+                  - entity: sensor.esp_dev_03_am2302_humidity
                     name: Humidity
                     unit: '%'
                     y_axis: secondary
-                height: 200
+                height: 180
                 lower_bound_secondary: 0
                 show:
                   extrema: true
@@ -465,23 +525,130 @@ views:
                   name: false
                 type: 'custom:mini-graph-card'
                 upper_bound_secondary: 100
-            type: horizontal-stack
-          - cards:
-              - cards:
-                  - template: view_back_button
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                type: horizontal-stack
-            type: horizontal-stack
+              - entity: binary_sensor.xiaomi_windowsensor_dining_room_contact
+                name: Window
+                template:
+                  - view_sensor_button
+                type: 'custom:button-card'
+              - entity: sensor.esp_dev_03_bh1750_illuminance
+                name: Lux
+                template:
+                  - view_sensor_button
+                type: 'custom:button-card'
+          - type: grid
+            columns: 4
+            cards:
+              - template: view_back_button
+                type: 'custom:button-card'
         type: vertical-stack
     icon: 'mdi:table-chair'
     path: dining-room
     title: Dining Room
+  - badges: []
+    cards:
+      - cards:
+          - custom_fields:
+              power_icon:
+                card:
+                  entity: light.kitchen
+                  template: view_power_icon_style
+                  type: 'custom:button-card'
+              slider:
+                card:
+                  entity: light.kitchen
+                  full_row: true
+                  toggle: false
+                  type: 'custom:slider-entity-row'
+            entity: light.kitchen
+            name: Kitchen Lights
+            template: view_lightgroup_button_style
+            type: 'custom:button-card'
+          - type: grid
+            columns: 2
+            cards:
+              - custom_fields:
+                  power_icon:
+                    card:
+                      entity: light.ikea_gu10_kitchen_light_1_light
+                      template: view_power_icon_style
+                      type: 'custom:button-card'
+                  slider:
+                    card:
+                      entity: light.ikea_gu10_kitchen_light_1_light
+                      full_row: true
+                      toggle: false
+                      type: 'custom:slider-entity-row'
+                entity: light.ikea_gu10_kitchen_light_1_light
+                name: Light 1
+                template: view_hue_white_gu10
+                type: 'custom:button-card'
+              - custom_fields:
+                  power_icon:
+                    card:
+                      entity: light.ikea_gu10_kitchen_light_2_light
+                      template: view_power_icon_style
+                      type: 'custom:button-card'
+                  slider:
+                    card:
+                      entity: light.ikea_gu10_kitchen_light_2_light
+                      full_row: true
+                      toggle: false
+                      type: 'custom:slider-entity-row'
+                entity: light.ikea_gu10_kitchen_light_2_light
+                name: Light 2
+                template: view_hue_white_gu10
+                type: 'custom:button-card'
+              - custom_fields:
+                  power_icon:
+                    card:
+                      entity: light.ikea_gu10_kitchen_light_3_light
+                      template: view_power_icon_style
+                      type: 'custom:button-card'
+                  slider:
+                    card:
+                      entity: light.ikea_gu10_kitchen_light_3_light
+                      full_row: true
+                      toggle: false
+                      type: 'custom:slider-entity-row'
+                entity: light.ikea_gu10_kitchen_light_3_light
+                name: Light 3
+                template: view_hue_white_gu10
+                type: 'custom:button-card'
+              - custom_fields:
+                  power_icon:
+                    card:
+                      entity: light.ikea_gu10_kitchen_light_4_light
+                      template: view_power_icon_style
+                      type: 'custom:button-card'
+                  slider:
+                    card:
+                      entity: light.ikea_gu10_kitchen_light_4_light
+                      full_row: true
+                      toggle: false
+                      type: 'custom:slider-entity-row'
+                entity: light.ikea_gu10_kitchen_light_4_light
+                name: Light 4
+                template: view_hue_white_gu10
+                type: 'custom:button-card'
+              - entity: binary_sensor.0x00158d00040e7281_contact
+                name: Door
+                template:
+                  - view_sensor_button
+                type: 'custom:button-card'
+              - entity: binary_sensor.0x00158d00045c1506_contact
+                name: Window
+                template:
+                  - view_sensor_button
+                type: 'custom:button-card'
+          - type: grid
+            columns: 4
+            cards:
+              - template: view_back_button
+                type: 'custom:button-card'
+        type: vertical-stack
+    icon: 'mdi:food-variant'
+    path: kitchen
+    title: Kitchen
   - badges: []
     cards:
       - cards:
@@ -501,7 +668,9 @@ views:
             name: Office Lights
             template: view_lightgroup_button_style
             type: 'custom:button-card'
-          - cards:
+          - type: grid
+            columns: 2
+            cards:
               - custom_fields:
                   power_icon:
                     card:
@@ -516,7 +685,7 @@ views:
                       type: 'custom:slider-entity-row'
                 double_tap_action: more-info
                 entity: light.office_light
-                template: view_hue_color_bulb
+                template: view_hue_white_bulb
                 type: 'custom:button-card'
               - custom_fields:
                   power_icon:
@@ -534,38 +703,84 @@ views:
                 entity: light.desk_lightstrip
                 template: view_hue_led
                 type: 'custom:button-card'
-            type: horizontal-stack
+              - align_state: right
+                decimals: 1
+                entities:
+                  - entity: sensor.esp_dev_01_bme280_temperature
+                    name: Temp
+                  - entity: sensor.esp_dev_01_bme280_humidity
+                    name: Humidity
+                    y_axis: secondary
+                height: 250
+                icon: 'mdi:radiator'
+                lower_bound_secondary: 0
+                name: Heating
+                show:
+                  extrema: true
+                  fill: fade
+                  icon: false
+                  labels: false
+                  labels_secondary: false
+                  legend: true
+                  name: false
+                type: 'custom:mini-graph-card'
+                upper_bound_secondary: 100
+              - type: entities
+                entities:
+                  - entity: input_boolean.work_from_home_mode
+                  - entity: switch.gaming_pc
+                  - entity: fan.dyson_fan
+                  - entity: switch.ikea_switch_1_switch
+                  - entity: switch.office_light_flux
+                show_header_toggle: false
+          - type: entities
+            entities:
+              - entity: sensor.zigbee2mqtt_bridge_state
+              - entity: sensor.zigbee2mqtt_version
+            title: Zigbee
+            show_header_toggle: false
+            state_color: false
           - cards:
-              - cards:
-                  - template: view_back_button
-                    type: 'custom:button-card'
-                  - color_type: card
-                    icon: 'mdi:gamepad-variant'
-                    show_name: false
-                    styles:
-                      card:
-                        - background: '#ECB44D'
-                    tap_action:
-                      action: call-service
-                      service: script.office_pc_gaming
-                    type: 'custom:button-card'
-                  - color_type: card
-                    icon: 'mdi:virtual-reality'
-                    show_name: false
-                    styles:
-                      card:
-                        - background: 'rgb(254,227,161)'
-                        - background: >-
-                            linear-gradient(45deg, rgba(254,227,161,1) 0%,
-                            rgba(255,255,255,1) 100%)
-                    tap_action:
-                      action: call-service
-                      service: script.office_vr_gaming
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                type: horizontal-stack
-            type: horizontal-stack
+              - template: view_back_button
+                type: 'custom:button-card'
+              - color_type: card
+                icon: 'mdi:gamepad-variant'
+                show_name: false
+                styles:
+                  card:
+                    - background: '#ECB44D'
+                tap_action:
+                  action: call-service
+                  service: script.office_pc_gaming
+                type: 'custom:button-card'
+              - color_type: card
+                icon: 'mdi:virtual-reality'
+                show_name: false
+                styles:
+                  card:
+                    - background: 'rgb(254,227,161)'
+                    - background: >-
+                        linear-gradient(45deg, rgba(254,227,161,1) 0%,
+                        rgba(255,255,255,1) 100%)
+                tap_action:
+                  action: call-service
+                  service: script.office_vr_gaming
+                type: 'custom:button-card'
+              - color_type: card
+                icon: 'mdi:home-analytics'
+                show_name: false
+                styles:
+                  card:
+                    - background: 'rgb(254,227,161)'
+                    - background: >-
+                        linear-gradient(45deg, rgba(253,255,213,1) 0%,
+                        rgba(255,255,255,1) 100%)
+                tap_action:
+                  action: call-service
+                  service: script.office_wfh_hue_scene
+                type: 'custom:button-card'
+            type: grid
+            columns: 4
         type: vertical-stack
     icon: 'mdi:chair-rolling'
     path: office
@@ -589,7 +804,9 @@ views:
             name: Master Bedroom
             template: view_lightgroup_button_style
             type: 'custom:button-card'
-          - cards:
+          - type: grid
+            columns: 2
+            cards:
               - custom_fields:
                   power_icon:
                     card:
@@ -622,14 +839,12 @@ views:
                 name: Side Light 2
                 template: view_hue_color_bulb
                 type: 'custom:button-card'
-            type: horizontal-stack
-          - cards:
               - align_state: right
                 decimals: 1
                 entities:
-                  - entity: sensor.nodemcu_02_temperature
+                  - entity: sensor.esp_dev_02_bme280_temperature
                     name: Temp
-                  - entity: sensor.nodemcu_02_humidity
+                  - entity: sensor.esp_dev_02_bme280_humidity
                     name: Humidity
                     y_axis: secondary
                 height: 200
@@ -643,29 +858,21 @@ views:
                   name: false
                 type: 'custom:mini-graph-card'
                 upper_bound_secondary: 100
-              - color_type: blank-card
-                type: 'custom:button-card'
-            type: horizontal-stack
           - cards:
-              - cards:
-                  - template: view_back_button
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                type: horizontal-stack
-            type: horizontal-stack
+              - template: view_back_button
+                type: 'custom:button-card'
+            type: grid
+            columns: 4
         type: vertical-stack
-    icon: 'mdi:hotel'
+    icon: 'mdi:bed'
     path: master-bedroom
     title: Master Bedroom
   - badges: []
     cards:
       - cards:
-          - cards:
+          - type: grid
+            columns: 2
+            cards:
               - custom_fields:
                   power_icon:
                     card:
@@ -684,30 +891,28 @@ views:
                   - entity: sensor.girls_room_humidity
                     name: Humidity
                     y_axis: secondary
-                height: 200
+                  - entity: sensor.girls_room_heating
+                    name: Power
+                    y_axis: secondary
+                height: 250
+                icon: 'mdi:radiator'
                 lower_bound_secondary: 0
+                name: Heating
                 show:
                   extrema: true
                   fill: fade
                   icon: false
                   labels: false
                   labels_secondary: false
+                  legend: false
                   name: false
                 type: 'custom:mini-graph-card'
                 upper_bound_secondary: 100
-            type: horizontal-stack
           - cards:
-              - cards:
-                  - template: view_back_button
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                type: horizontal-stack
-            type: horizontal-stack
+              - template: view_back_button
+                type: 'custom:button-card'
+            type: grid
+            columns: 4
         type: vertical-stack
     icon: 'mdi:bunk-bed'
     path: girls-room
@@ -719,34 +924,26 @@ views:
               - custom_fields:
                   power_icon:
                     card:
-                      entity: light.spare_room_side_light
+                      entity: light.spare_room_light_light
                       template: view_power_icon_style
                       type: 'custom:button-card'
                   slider:
                     card:
-                      entity: light.spare_room_side_light
+                      entity: light.spare_room_light_light
                       full_row: true
                       toggle: false
                       type: 'custom:slider-entity-row'
-                entity: light.spare_room_side_light
+                entity: light.spare_room_light_light
                 name: Side Light
                 template: view_hue_color_bulb
                 type: 'custom:button-card'
-              - color_type: blank-card
-                type: 'custom:button-card'
-            type: horizontal-stack
+            type: grid
+            columns: 2
           - cards:
-              - cards:
-                  - template: view_back_button
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                type: horizontal-stack
-            type: horizontal-stack
+              - template: view_back_button
+                type: 'custom:button-card'
+            type: grid
+            columns: 4
         type: vertical-stack
     icon: 'mdi:bed-empty'
     path: spare-room
@@ -754,7 +951,9 @@ views:
   - badges: []
     cards:
       - cards:
-          - cards:
+          - type: grid
+            columns: 2
+            cards:
               - custom_fields:
                   power_icon:
                     card:
@@ -784,19 +983,28 @@ views:
                   labels: false
                   name: false
                 type: 'custom:mini-graph-card'
-            type: horizontal-stack
-          - cards:
-              - cards:
-                  - template: view_back_button
+              - type: vertical-stack
+                cards:
+                  - entity: binary_sensor.xiaomi_windowsensor_bathroom_contact
+                    name: Window
+                    template:
+                      - view_sensor_button
                     type: 'custom:button-card'
-                  - color_type: blank-card
+                  - entity: binary_sensor.bathroom_sensor_motion
+                    name: Motion
+                    template:
+                      - view_sensor_button
                     type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                type: horizontal-stack
-            type: horizontal-stack
+              - entity: sensor.bathroom_sensor_light_level
+                name: Lux
+                template:
+                  - view_sensor_button
+                type: 'custom:button-card'
+          - type: grid
+            columns: 4
+            cards:
+              - template: view_back_button
+                type: 'custom:button-card'
         type: vertical-stack
     icon: 'mdi:toilet'
     path: bathroom
@@ -804,7 +1012,9 @@ views:
   - badges: []
     cards:
       - cards:
-          - cards:
+          - type: grid
+            columns: 2
+            cards:
               - custom_fields:
                   power_icon:
                     card:
@@ -821,22 +1031,18 @@ views:
                 name: Front Door Light
                 template: view_hue_white_bulb
                 type: 'custom:button-card'
-              - entity: binary_sensor.0x00158d000420b592_contact
-                name: Front Door
-                type: entity
-            type: horizontal-stack
-          - cards:
               - cards:
-                  - template: view_back_button
+                  - entity: binary_sensor.0x00158d000420b592_contact
+                    name: Front Door
+                    template:
+                      - view_sensor_button
                     type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                  - color_type: blank-card
-                    type: 'custom:button-card'
-                type: horizontal-stack
-            type: horizontal-stack
+                type: vertical-stack
+          - type: grid
+            columns: 4
+            cards:
+              - template: view_back_button
+                type: 'custom:button-card'
         type: vertical-stack
     icon: 'mdi:door'
     path: front_door
@@ -859,7 +1065,7 @@ views:
                       type: 'custom:slider-entity-row'
                 entity: light.landing_light_light
                 name: Landing Light
-                template: view_hue_white_bulb
+                template: view_hue_color_bulb
                 type: 'custom:button-card'
               - color_type: blank-card
                 type: 'custom:button-card'
