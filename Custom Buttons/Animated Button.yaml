@@ -1,0 +1,122 @@
+button_card_templates:
+  animated_btn_states_on:
+    state:
+      - spin: true
+        styles:
+          card:
+            - background-color: '#DFDFDF'
+          custom_fields:
+            s2:
+              - color: Grey
+          label:
+            - color: Grey
+            - font-size: 11pt
+          name:
+            - color: '#171717'
+          state:
+            - color: Grey
+        value: 'on'
+  standard_btn_states:
+    state:
+      - styles:
+          card:
+            - background-color: red
+          custom_fields:
+            s2:
+              - color: white
+          icon:
+            - color: white
+          label:
+            - color: white
+          name:
+            - color: white
+          state:
+            - color: white
+        value: unavailable
+      - styles:
+          card: null
+          custom_fields:
+            s2: null
+          icon: null
+          label: null
+          name: null
+          state: null
+        value: 'off'
+  standard_btn_states_on:
+    state:
+      - styles:
+          card:
+            - background-color: '#DFDFDF'
+          custom_fields:
+            s2:
+              - color: Grey
+          label:
+            - color: Grey
+            - font-size: 11pt
+          name:
+            - color: '#171717'
+          state:
+            - color: Grey
+        value: 'on'
+  standard_btn_layout:
+    aspect_ratio: 1/1
+    size: 70%
+    styles:
+      card: null
+      custom_fields:
+        s2:
+          - justify-self: start
+          - margin-left: 10%
+          - padding-bottom: 5%
+          - font-size: 10pt
+      grid:
+        - grid-template-areas: '"i l" "n n" "s s" "s2 s2"'
+        - grid-template-columns: 1fr 1fr
+        - grid-template-rows: 1fr auto auto auto
+      icon: null
+      label:
+        - justify-self: start
+      name:
+        - justify-self: start
+        - margin-left: 10%
+        - font-weight: bold
+      state:
+        - justify-self: start
+        - margin-left: 10%
+        - font-size: 10pt
+  switch_btn:
+    double_tap_action:
+      action: more-info
+    show_state: true
+    tap_action:
+      action: toggle
+title: Animated Fan Button
+views:
+  - title: Animated Fan Button
+    path: test
+    badges: []
+    cards:
+      - type: grid
+        cards:
+          - custom_fields:
+              s2: |
+                [[[
+                  if (entity.state == "on") 
+                  return "Speed " + (states['input_text.dyson_fan_speed'].state);
+                  else return "&nbsp" 
+                ]]]
+            entity: fan.dyson_fan
+            icon: 'mdi:fan'
+            name: Dyson Fan
+            state:
+              - icon: 'mdi:power'
+                value: 'off'
+              - icon: 'mdi:fan'
+                spin: true
+                value: 'on'
+            template:
+              - standard_btn_layout
+              - standard_btn_states
+              - animated_btn_states_on
+              - switch_btn
+            type: 'custom:button-card'
