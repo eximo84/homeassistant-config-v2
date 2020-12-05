@@ -6,7 +6,11 @@ For further reference see the Custom Button Card Repo: https://github.com/custom
 
 Some of these are still WIP and can be improved.
 
+Standard button cards are setup in a 3 column grid. View button card is a 2 column grid.
+
 ## Light Button
+
+![Light](https://user-images.githubusercontent.com/25502878/101266388-4df3e500-3746-11eb-8c1a-a94d53d3c118.PNG)
 
 * Used with any light entity
 * Background illuminates if the light entity state is on
@@ -16,12 +20,16 @@ Some of these are still WIP and can be improved.
 
 ## Switch Button
 
+![Switch](https://user-images.githubusercontent.com/25502878/101266390-4e8c7b80-3746-11eb-82a8-e21d7452072c.PNG)
+
 * Used with any switch or input boolean entity
 * Background illuminates if the switch is on
 * Switch entity status is shown
 * Supports secondary information
 
 ## Climate Button
+
+![Climate](https://user-images.githubusercontent.com/25502878/101266386-4d5b4e80-3746-11eb-866c-8f8d77d835c5.PNG)
 
 * Used to display climate information for Tado system
 * Background changes depending on target temp - same as Tado iOS App
@@ -33,6 +41,8 @@ Some of these are still WIP and can be improved.
 
 ## Garbage Button
 
+![Garbage](https://user-images.githubusercontent.com/25502878/101266387-4df3e500-3746-11eb-8550-8a70817d4e6b.PNG)
+
 Requires custom component Garbage Collection: https://github.com/bruxy70/Garbage-Collection
 
 * Shows upcoming garbage collection type based on calendar
@@ -43,6 +53,8 @@ Requires custom component Garbage Collection: https://github.com/bruxy70/Garbage
 
 ## Animated Button
 
+![Animated](https://user-images.githubusercontent.com/25502878/101266385-4d5b4e80-3746-11eb-8830-53d01766927c.PNG)
+
 * Used with any switch or input boolean entity
 * Background illuminates if the switch is on
 * Switch entity status is shown
@@ -50,6 +62,8 @@ Requires custom component Garbage Collection: https://github.com/bruxy70/Garbage
 * Icon is animated - example used is a Fan
 
 ## Music Playback
+
+![Music](https://user-images.githubusercontent.com/25502878/101266389-4df3e500-3746-11eb-805c-87c8727a3956.PNG)
 
 My setup uses Chromecasts for multi room audio with playback from YouTube Music.  Other apps and speakers might also work.
 
@@ -62,6 +76,8 @@ See main LoveLace Overview and look at the Music Tab for full setup - https://gi
 * Used in conjunction with Mini-Media Player allows for a dynamic playback interface
 
 ## View Light Button
+
+![View Light Button](https://user-images.githubusercontent.com/25502878/101266384-4cc2b800-3746-11eb-9d7f-cadb77f1ed93.PNG)
 
 Requires lovelace card Slider Entity Row - https://github.com/thomasloven/lovelace-slider-entity-row
 
