@@ -1,0 +1,113 @@
+button_card_templates:
+  round_badge_state_layout:
+    show_state: true
+    show_icon: false
+    show_label: true
+    show_units: false
+    styles:
+      grid:
+        - grid-template-areas: '"s" "n" "l"'
+        - grid-template-rows: 1fr min-content min-content
+        - grid-template-columns: 1fr
+      card:
+        - height: 125px
+        - background-color: transparent
+        - box-shadow: none
+        - border-radius: 0
+      state:
+        - width: 60px
+        - height: 60px
+        - border-radius: 50%
+        - border: '2px solid #717171'
+        - display: 'var(--ha-icon-display, inline-flex)'
+        - align-items: center
+        - justify-content: center
+        - position: relative
+        - vertical-align: middle
+        - color: '#f3f2f2'
+      name:
+        - width: 100%
+        - font-size: 0.9em
+        - color: '#f3f2f2'
+      label:
+        - width: 100%
+        - font-size: 0.8em
+        - color: '#f3f2f2'
+  round_badge_icon_layout:
+    show_state: true
+    styles:
+      card:
+        - height: 125px
+        - background-color: transparent
+        - box-shadow: none
+        - border-radius: 0
+      img_cell:
+        - width: 64px
+        - height: 64px
+        - border-radius: 50%
+      icon:
+        - width: 50%
+      name:
+        - width: 100%
+        - font-size: 0.9em
+      state:
+        - width: 100%
+        - font-size: 0.8em
+  round_badge_icon_states:
+    state:
+      - id: id_off
+        value: 'off'
+        styles:
+          img_cell:
+            - border: '2px solid #717171'
+            - width: 60px
+            - height: 60px
+      - id: id_on
+        value: 'on'
+        styles:
+          img_cell:
+            - background: 'rgb(233,233,233)'
+            - background: >-
+                linear-gradient(0deg, rgba(233,233,233,0.8) 0%,
+                rgba(233,233,233,1) 100%)
+          name:
+            - color: '#f3f2f2'
+          state:
+            - color: '#f3f2f2'
+title: Button Configs
+views:
+  - title: Badge Button
+    path: test
+    badges: []
+    cards:
+      - type: grid
+        cards:
+          - variables:
+              active_lights: |
+                [[[ 
+                  return (states['sensor.active_lights'].state) 
+                ]]]
+            entity: light.all_lights
+            state:
+              - icon: 'mdi:lightbulb-off'
+                id: id_off
+              - icon: 'mdi:lightbulb-on'
+                id: id_on
+            type: 'custom:button-card'
+            name: |
+              [[[
+                if (variables.active_lights >= 2) return variables.active_lights + " Lights";   
+                else if (variables.active_lights == 1) return variables.active_lights + " Light"; 
+                else return "All Lights";
+              ]]]
+            template:
+              - round_badge_icon_layout
+              - round_badge_icon_states
+          - entity: sensor.avg_house_temp
+            type: 'custom:button-card'
+            name: Climate
+            label: '&nbsp;'
+            template:
+              - round_badge_state_layout
+        columns: 5
+        square: true
