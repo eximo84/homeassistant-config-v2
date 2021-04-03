@@ -1,0 +1,85 @@
+button_card_templates:
+  half_btn:
+    aspect_ratio: 2/1
+    show_name: true
+    show_state: true
+    styles:
+      grid:
+        - grid-template-areas: '"i n" "i s" '
+        - grid-template-rows: 50%
+        - grid-template-columns: 50% 50%
+      card:
+        - border-radius: 0
+        - box-shadow: none
+      icon:
+        - width: 50%
+      state:
+        - font-size: 10pt
+        - justify-self: start
+        - margin-left: 10%
+        - margin-bottom: 10px
+      name:
+        - justify-self: start
+        - margin-left: 10%
+        - font-weight: bold
+        - padding: 0
+        - margin-top: 10px
+    state:
+      - value: not_home
+        styles:
+          icon:
+            - filter: grayscale(100%)
+            - filter: opacity(30%)
+          label:
+            - filter: opacity(30%)
+          name:
+            - filter: opacity(30%)
+          state:
+            - filter: opacity(30%)
+      - value: home
+        styles:
+          card:
+            - background-color: '#4CAF50'
+            - color: white
+          icon:
+            - color: white
+          state:
+            - color: white
+title: Button Configs
+views:
+  - title: Badge Button
+    path: test
+    badges: []
+    cards:
+      - type: grid
+        cards:
+          - aspect_ratio: 1/1
+            type: 'custom:button-card'
+            custom_fields:
+              top_btn:
+                card:
+                  type: 'custom:button-card'
+                  aspect_ratio: 2/1
+                  entity: device_tracker.daves_ipad
+                  name: iPad 1
+                  template:
+                    - half_btn
+              bottom_btn:
+                card:
+                  type: 'custom:button-card'
+                  entity: device_tracker.daves_ipad
+                  name: iPad 2
+                  template:
+                    - half_btn
+            styles:
+              grid:
+                - grid-template-areas: '"top_btn" "bottom_btn"'
+                - grid-template-rows: 50% 50%
+                - grid-template-columns: 100%
+              card:
+                - padding: 0
+                - margin: 0
+            triggers_update:
+              - device_tracker.daves_ipad
+        columns: 3
+        square: true
