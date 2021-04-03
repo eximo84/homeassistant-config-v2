@@ -6,13 +6,16 @@ For further reference see the Custom Button Card Repo: https://github.com/custom
 
 Some of these are still WIP and can be improved.
 
-Badge Buttons mimic Home Assistant or HomeKit badges.  Providing subtle information with a tap action to other views or popup cards.  Badge Button is a 5 column grid
+## Badge Buttons 
+
+These mimic the default Home Assistant badges or HomeKit badges.  Providing subtle information with a tap action to other views or popup cards.  Badge Button is a 5 column grid
 
 ![Badge](https://user-images.githubusercontent.com/25502878/113141009-104d2780-9221-11eb-9379-8573967100f0.PNG)
 
 * Used with any entity
 * Background illuminates if the entity is on or provides a transparent background with a border when off
 * Name/Status/Label can be used to provide more information - here im using a template sensor to count lights on from a specific group then providing that to the button.
+* I use a heavily modified custom badge to display music information
 
 Standard button cards are setup in a 3 column grid. View button card is a 2 column grid.
 
@@ -46,6 +49,15 @@ Standard button cards are setup in a 3 column grid. View button card is a 2 colu
 * Climate heating power % is shown
 * Icon "should" change depending on heating mode - not working at the moment
 * Custom Icons for Tado System
+
+## Dual Button
+
+![Dual Button](https://user-images.githubusercontent.com/25502878/113473576-38779900-9462-11eb-9114-64efcc8e4f9f.PNG)
+
+* Used to display related information from two entities e.g. Person Tracking or Energy Tracking
+* Background changes depending on state
+* Button shows more-info for entity by default but can easily be adapted to peform different actions
+* Adjust width of the grid columns to allow longer names/states
 
 ## Garbage Button
 
