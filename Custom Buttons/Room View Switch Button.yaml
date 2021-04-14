@@ -1,0 +1,149 @@
+button_card_templates:
+  view_power_icon_layout:
+    icon: 'mdi:power'
+    show_name: false
+    show_state: false
+    state:
+      - styles:
+          card:
+            - border: 3px solid var(--disabled-text-color)
+            - transition: border 0.2s ease
+          icon:
+            - color: var(--primary-text-color)
+            - background-color: var(--disabled-text-color)
+            - transition: left 0.2s ease
+            - position: relative
+            - left: '-19px'
+        value: 'off'
+      - styles:
+          card:
+            - border: '3px solid #4CAF50'
+            - transition: border 0.2s ease
+          icon:
+            - color: white
+            - background-color: '#4CAF50'
+            - transition: left 0.2s ease
+            - position: relative
+            - left: 20px
+        value: 'on'
+      - styles:
+          card:
+            - border: '3px solid #F44336'
+            - transition: border 0.2s ease
+          icon:
+            - color: white
+            - background-color: '#F44336'
+            - transition: left 0.2s ease
+            - position: relative
+            - left: '-19px'
+        value: unavailable
+    styles:
+      card:
+        - width: 75px
+        - height: 37px
+        - border-radius: 500px
+        - box-shadow: none
+      icon:
+        - height: 25px
+        - width: 25px
+        - border-radius: 25px
+  view_switch_layout:
+    show_label: true
+    show_state: true
+    show_last_changed: true
+    show_icon: true
+    state_display: |
+      [[[ 
+        if (entity.state == 'unavailable') return entity.state;
+        else return variables.custom_state_display ; 
+      ]]]
+    state:
+      - styles:
+          icon:
+            - filter: grayscale(100%)
+          state:
+            - color: var(--disabled-text-color)
+          label:
+            - color: var(--disabled-text-color)
+        value: 'off'
+      - styles:
+          label:
+            - color: var(--disabled-text-color)
+          name:
+            - color: var(--primary-text-color)
+          state:
+            - color: var(--primary-text-color)
+        value: 'on'
+      - styles:
+          label:
+            - color: var(--disabled-text-color)
+          name:
+            - color: '#F44336'
+          state:
+            - color: '#F44336'
+        value: unavailable
+    styles:
+      card:
+        - height: 150px
+      custom_fields:
+        power_icon:
+          - justify-self: end
+          - margin: 0% 10% 0% 0%
+      icon:
+        - width: 80%
+      grid:
+        - grid-template-areas: '"i n n" "i s power_icon" "i l power_icon" '
+        - grid-template-columns: 30% 45% 25%
+        - grid-template-rows: 55% 15% 30%
+      name:
+        - font-weight: bold
+        - justify-self: start
+        - margin: 0% 0% 5% 0%
+      state:
+        - justify-self: start
+        - margin: 0% 0% 0% 0%
+      label:
+        - justify-self: start
+        - margin: 0% 0% 0% 0%
+    tap_action:
+      action: more-info
+title: Button Configs
+views:
+  - title: Room View Switch Button
+    path: test
+    badges: []
+    cards:
+      - type: grid
+        cards:
+          - type: 'custom:button-card'
+            entity: switch.tv_mss310_main_channel
+            template: view_switch_layout
+            name: TV
+            variables:
+              custom_state_display: |
+                [[[ 
+                  return "Consuming " + (states['sensor.washing_machine_mss310_power_sensor_w_0'].state) +"w"
+                ]]]
+            custom_fields:
+              power_icon:
+                card:
+                  type: 'custom:button-card'
+                  entity: switch.tv_mss310_main_channel
+                  template: view_power_icon_layout
+          - type: 'custom:button-card'
+            entity: switch.washing_machine_mss310_main_channel
+            template: view_switch_layout
+            name: Washing Machine
+            variables:
+              custom_state_display: |
+                [[[ 
+                  return "Consuming " + (states['sensor.washing_machine_mss310_power_sensor_w_0'].state) +"w"
+                ]]]
+            custom_fields:
+              power_icon:
+                card:
+                  type: 'custom:button-card'
+                  entity: switch.washing_machine_mss310_main_channel
+                  template: view_power_icon_layout
+        columns: 1
+        square: false
