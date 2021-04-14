@@ -1,0 +1,384 @@
+button_card_templates:
+  generic_color_bulb:
+    custom_fields:
+      icon_hue: >
+        <svg viewBox="0 0 32 32"><path xmlns="http://www.w3.org/2000/svg"
+        id="bulb" d="M9.573,13.208c1.887,0.597 4.639,0.792 6.427,0.792c1.788,0
+        4.54,-0.195 6.427,-0.792c-0.768,2.018 -2.1,2.911
+        -2.417,4.792c-0.138,0.819 -0.255,1.963 -0.177,2.801c0.049,0.533
+        -0.357,1.001 -0.89,1.055c-0.864,0.089 -1.846,0.144 -2.943,0.144c-1.098,0
+        -2.079,-0.055 -2.944,-0.144c-0.533,-0.054 -0.938,-0.522
+        -0.889,-1.055c0.078,-0.838 -0.039,-1.982 -0.177,-2.801c-0.317,-1.881
+        -1.649,-2.774 -2.417,-4.792Zm3.427,9.654c1.041,0.101 2.187,0.138
+        3,0.138c0.813,0 1.959,-0.037 3,-0.138l-0.501,3.108c-0.026,0.218
+        -0.132,0.42 -0.3,0.573l-0.467,0.424c-0.031,0.029 -0.06,0.06
+        -0.087,0.092l-0.494,0.583c-0.19,0.226 -0.479,0.358
+        -0.786,0.358l-0.365,0l-0.365,0c-0.307,0 -0.596,-0.132
+        -0.786,-0.358l-0.494,-0.583c-0.027,-0.032 -0.056,-0.063
+        -0.087,-0.092l-0.467,-0.424c-0.168,-0.153 -0.274,-0.355
+        -0.3,-0.573l-0.501,-3.108Z" style="fill:#C0C0C0;"/><path
+        xmlns="http://www.w3.org/2000/svg" id="light" d="M16,4c3.853,0 7,3.332
+        7,6.5c0,0.289 -0.055,0.543 -0.085,0.805c-0.031,0.256 -0.074,0.47
+        -0.127,0.707c-1.09,0.46 -3.404,0.988 -6.788,0.988c-3.384,0 -5.698,-0.528
+        -6.788,-0.988c-0.053,-0.237 -0.096,-0.451 -0.127,-0.707c-0.03,-0.262
+        -0.085,-0.516 -0.085,-0.805c0,-3.168 3.147,-6.5 7,-6.5Z"
+        style="fill:var(--button-card-light-color)"/></svg>
+    template: view_light_layout
+  hue_gu10_bulb:
+    custom_fields:
+      icon_hue: >
+        <svg viewBox="0 0 32 32"><path id="Bulb" d="M8.215,10.087c2.168,0.92
+        5.474,1.219 7.785,1.219c2.312,-0 5.617,-0.299 7.785,-1.219c-0.328,1.919
+        -1.137,4.545 -3.561,6.294c-0.203,0.187 -0.224,0.5
+        -0.224,1.125l-0,3.686c-0,0.477 -0.153,0.946 -0.466,1.3c-0.5,0.567
+        -1.575,1 -3.534,1c-1.959,-0 -3.034,-0.433 -3.534,-1c-0.313,-0.354
+        -0.466,-0.823 -0.466,-1.3l-0,-3.686c-0,-0.625 -0.02,-0.938
+        -0.223,-1.125c-2.424,-1.749 -3.234,-4.375
+        -3.562,-6.294Zm8.785,15.913l0,-1.542c0.894,-0.083 1.548,-0.274
+        2,-0.533l0,2.075c0,0.55 -0.45,1 -1,1c-0.55,0 -1,-0.45
+        -1,-1Zm-4,0l0,-2.075c0.452,0.259 1.106,0.45 2,0.533l0,1.542c0,0.55
+        -0.45,1 -1,1c-0.55,0 -1,-0.45 -1,-1Z" style="fill:#C0C0C0;"/><path
+        id="Light" d="M16,5c4.97,0 9,1.188 9,2.653c0,1.464 -4.03,2.653
+        -9,2.653c-4.97,-0 -9,-1.189 -9,-2.653c0,-0.18 0.06,-0.361
+        0.18,-0.531c0.83,-1.21 4.47,-2.122 8.82,-2.122Z"
+        style="fill:var(--button-card-light-color-no-temperature)"/></svg>
+    template: view_light_layout
+  hue_led_strip:
+    custom_fields:
+      icon_hue: >
+        <svg viewBox="0 0 32 32"><path d="M8.4395,16.668 C8.9795,16.552
+        9.5115,16.895 9.6285,17.435 C9.7455,17.974 9.4025,18.506 8.8625,18.623
+        C8.3225,18.74 7.7905,18.397 7.6735,17.857 C7.5565,17.317 7.9005,16.785
+        8.4395,16.668 M13.3275,15.611 C13.8665,15.495 14.3985,15.838
+        14.5155,16.377 C14.6325,16.917 14.2895,17.449 13.7505,17.566
+        C13.2105,17.683 12.6775,17.34 12.5605,16.8 C12.4445,16.261
+        12.7875,15.729 13.3275,15.611 M18.2135,14.555 C18.7535,14.438
+        19.2865,14.781 19.4025,15.32 C19.5195,15.86 19.1765,16.393 18.6365,16.51
+        C18.0965,16.626 17.5645,16.283 17.4485,15.743 C17.3315,15.203
+        17.6735,14.671 18.2135,14.555 M23.1005,13.498 C23.6405,13.381
+        24.1725,13.724 24.2905,14.264 C24.4065,14.804 24.0635,15.336
+        23.5235,15.453 C22.9835,15.569 22.4515,15.227 22.3355,14.687
+        C22.2175,14.147 22.5615,13.614 23.1005,13.498 M10.6695,20.639
+        L25.4735,17.444 C26.5535,17.211 27.2405,16.147 27.0065,15.067
+        C26.4495,12.484 23.9035,10.842 21.3205,11.399 L6.5165,14.594
+        C5.4365,14.827 4.7505,15.891 4.9835,16.971 C5.5415,19.554 8.0865,21.196
+        10.6695,20.639 M25,26 C24.447,26 24,25.553 24,25 C24,24.447 24.447,24
+        25,24 C25.553,24 26,24.447 26,25 C26,25.553 25.553,26 25,26 M20,26
+        C19.447,26 19,25.553 19,25 C19,24.447 19.447,24 20,24 C20.553,24
+        21,24.447 21,25 C21,25.553 20.553,26 20,26 M15,26 C14.447,26 14,25.553
+        14,25 C14,24.447 14.447,24 15,24 C15.553,24 16,24.447 16,25 C16,25.553
+        15.553,26 15,26 M10,26 C9.447,26 9,25.553 9,25 C9,24.447 9.447,24 10,24
+        C10.553,24 11,24.447 11,25 C11,25.553 10.553,26 10,26 M27,22 L9,22 C5,22
+        4,19 4,18 L4,23 C4,25.762 6.238,28 9,28 L27,28 C27.553,28 28,27.553
+        28,27 L28,23 C28,22.447 27.553,22 27,22 M22,8 C21.447,8 21,7.553 21,7
+        C21,6.447 21.447,6 22,6 C22.553,6 23,6.447 23,7 C23,7.553 22.553,8 22,8
+        M17,8 C16.447,8 16,7.553 16,7 C16,6.447 16.447,6 17,6 C17.553,6 18,6.447
+        18,7 C18,7.553 17.553,8 17,8 M12,8 C11.447,8 11,7.553 11,7 C11,6.447
+        11.447,6 12,6 C12.553,6 13,6.447 13,7 C13,7.553 12.553,8 12,8 M7,8
+        C6.447,8 6,7.553 6,7 C6,6.447 6.447,6 7,6 C7.553,6 8,6.447 8,7 C8,7.553
+        7.553,8 7,8 M23,4 L5,4 C4.447,4 4,4.447 4,5 L4,9 C4,9.553 4.447,10 5,10
+        L23,10 C27,10 28,13 28,14 L28,9 C28,6.238 25.762,4 23,4"
+        style="fill:#C0C0C0;"></path> <g><circle cx="7" cy="7" r="0.878"
+        style="fill:var(--button-card-light-color)"/> <circle cx="17" cy="7"
+        r="0.878" style="fill:var(--button-card-light-color)"/> <circle cx="22"
+        cy="7" r="0.878" style="fill:var(--button-card-light-color)"/> <circle
+        cx="8.651" cy="17.646" r="0.878"
+        style="fill:var(--button-card-light-color)"/> <circle cx="13.538"
+        cy="16.589" r="0.878" style="fill:var(--button-card-light-color)"/>
+        <circle cx="18.425" cy="15.532" r="0.878"
+        style="fill:var(--button-card-light-color)"/> <circle cx="23.313"
+        cy="14.475" r="0.878" style="fill:var(--button-card-light-color)"/>
+        <circle cx="10" cy="25" r="0.878"
+        style="fill:var(--button-card-light-color)"/> <circle cx="15" cy="25"
+        r="0.878" style="fill:var(--button-card-light-color)"/> <circle cx="20"
+        cy="25" r="0.878" style="fill:var(--button-card-light-color)"/> <circle
+        cx="25" cy="25" r="0.878" style="fill:var(--button-card-light-color)"/>
+        <circle cx="12" cy="7" r="0.878"
+        style="fill:var(--button-card-light-color)"/></g> </svg>
+    template: view_light_layout
+  hue_white_bulb:
+    custom_fields:
+      icon_hue: >
+        <svg viewBox="0 0 32 32"><path xmlns="http://www.w3.org/2000/svg"
+        id="bulb" d="M9.573,13.208c1.887,0.597 4.639,0.792 6.427,0.792c1.788,0
+        4.54,-0.195 6.427,-0.792c-0.768,2.018 -2.1,2.911
+        -2.417,4.792c-0.138,0.819 -0.255,1.963 -0.177,2.801c0.049,0.533
+        -0.357,1.001 -0.89,1.055c-0.864,0.089 -1.846,0.144 -2.943,0.144c-1.098,0
+        -2.079,-0.055 -2.944,-0.144c-0.533,-0.054 -0.938,-0.522
+        -0.889,-1.055c0.078,-0.838 -0.039,-1.982 -0.177,-2.801c-0.317,-1.881
+        -1.649,-2.774 -2.417,-4.792Zm3.427,9.654c1.041,0.101 2.187,0.138
+        3,0.138c0.813,0 1.959,-0.037 3,-0.138l-0.501,3.108c-0.026,0.218
+        -0.132,0.42 -0.3,0.573l-0.467,0.424c-0.031,0.029 -0.06,0.06
+        -0.087,0.092l-0.494,0.583c-0.19,0.226 -0.479,0.358
+        -0.786,0.358l-0.365,0l-0.365,0c-0.307,0 -0.596,-0.132
+        -0.786,-0.358l-0.494,-0.583c-0.027,-0.032 -0.056,-0.063
+        -0.087,-0.092l-0.467,-0.424c-0.168,-0.153 -0.274,-0.355
+        -0.3,-0.573l-0.501,-3.108Z" style="fill:#C0C0C0;"/><path
+        xmlns="http://www.w3.org/2000/svg" id="light" d="M16,4c3.853,0 7,3.332
+        7,6.5c0,0.289 -0.055,0.543 -0.085,0.805c-0.031,0.256 -0.074,0.47
+        -0.127,0.707c-1.09,0.46 -3.404,0.988 -6.788,0.988c-3.384,0 -5.698,-0.528
+        -6.788,-0.988c-0.053,-0.237 -0.096,-0.451 -0.127,-0.707c-0.03,-0.262
+        -0.085,-0.516 -0.085,-0.805c0,-3.168 3.147,-6.5 7,-6.5Z"
+        style="fill:var(--button-card-light-color-no-temperature)"/></svg>
+    template: view_light_layout
+  hue_color_bulb:
+    custom_fields:
+      icon_hue: >
+        <svg viewBox="0 0 32 32"><path id="Bulb" d="M16,11.999c1.523,0
+        3.746,-0.143 5.539,-0.553c-1.358,4.219 -1.591,8.078
+        -1.545,9.176c0.011,0.255 -0.076,0.496
+        -0.242,0.689l-0.441,0.504c-0.952,0.113 -2.055,0.184
+        -3.311,0.184c-1.256,0 -2.359,-0.071
+        -3.311,-0.184l-0.441,-0.504c-0.166,-0.193 -0.253,-0.434
+        -0.242,-0.689c0.046,-1.098 -0.187,-4.957 -1.545,-9.176c1.793,0.41
+        4.016,0.553 5.539,0.553Zm-2.998,10.862c1.042,0.101 2.188,0.138
+        3.002,0.138c0.814,0 1.96,-0.037 3.002,-0.138l-0.501,3.108c-0.026,0.218
+        -0.132,0.42 -0.3,0.573l-0.467,0.424c-0.032,0.029 -0.061,0.06
+        -0.089,0.092l-0.493,0.583c-0.19,0.226 -0.48,0.358
+        -0.787,0.358l-0.365,0l-0.365,0c-0.307,0 -0.596,-0.132
+        -0.786,-0.358l-0.495,-0.583c-0.027,-0.032 -0.056,-0.063
+        -0.087,-0.092l-0.467,-0.424c-0.168,-0.153 -0.275,-0.355
+        -0.301,-0.573l-0.501,-3.108Z" style="fill:#C0C0C0;"/><path id="Light"
+        d="M22.304,5.398c1.525,1.402 0.137,3.985 -0.329,4.907c-1.257,0.366
+        -3.269,0.695 -5.975,0.695c-2.706,0 -4.717,-0.329
+        -5.974,-0.695c-0.466,-0.922 -1.855,-3.505 -0.329,-4.907c1.631,-1.499
+        6.028,-1.396 6.303,-1.396c0.276,0 4.672,-0.103 6.304,1.396Z"
+        style="fill:var(--button-card-light-color)"/></svg>
+    template: view_light_layout
+  view_gu10_uplight:
+    styles:
+      custom_fields:
+        icon_hue:
+          - transform: scale(1.4)
+          - position: relative
+          - top: 35%
+  view_gu10_downlight:
+    styles:
+      custom_fields:
+        icon_hue:
+          - transform: scale(1.4) rotate(180deg)
+          - position: relative
+          - bottom: 35%
+  view_bulb_uplight:
+    styles:
+      custom_fields:
+        icon_hue:
+          - transform: scale(1.6)
+          - position: relative
+          - top: 35%
+  view_bulb_downlight:
+    styles:
+      custom_fields:
+        icon_hue:
+          - transform: scale(1.6) rotate(180deg)
+          - position: relative
+          - bottom: 35%
+  view_light_layout:
+    label: Second Info
+    show_label: true
+    show_state: true
+    show_last_changed: true
+    show_icon: false
+    state_display: |
+      [[[ 
+        if (entity.state == 'unavailable') return entity.state;
+        else return variables.custom_state_display ; 
+      ]]]
+    state:
+      - styles:
+          custom_fields:
+            icon_hue:
+              - filter: brightness(75%)
+          state:
+            - color: var(--disabled-text-color)
+          label:
+            - color: var(--disabled-text-color)
+        value: 'off'
+      - styles:
+          label:
+            - color: var(--disabled-text-color)
+          name:
+            - color: var(--primary-text-color)
+          state:
+            - color: var(--primary-text-color)
+        value: 'on'
+      - styles:
+          label:
+            - color: var(--disabled-text-color)
+          name:
+            - color: '#F44336'
+          state:
+            - color: '#F44336'
+        value: unavailable
+    styles:
+      card:
+        - height: 150px
+      custom_fields:
+        power_icon:
+          - justify-self: end
+          - margin: 0% 10% 0% 0%
+        slider:
+          - margin: 0% 5% 5% 0%
+      grid:
+        - grid-template-areas: >-
+            "icon_hue n n" "icon_hue slider slider" "icon_hue s power_icon"
+            "icon_hue l power_icon" 
+        - grid-template-columns: 30% 45% 25%
+        - grid-template-rows: 30% 30% 20% 20%
+      name:
+        - font-weight: bold
+        - justify-self: start
+        - margin: 0% 0% 5% 0%
+      state:
+        - justify-self: start
+        - margin: 0% 0% 0% 0%
+      label:
+        - justify-self: start
+        - margin: 0% 0% 0% 0%
+    tap_action:
+      action: more-info
+  view_power_icon_layout:
+    icon: 'mdi:power'
+    show_name: false
+    show_state: false
+    state:
+      - styles:
+          card:
+            - border: 3px solid var(--disabled-text-color)
+            - transition: border 0.2s ease
+          icon:
+            - color: var(--primary-text-color)
+            - background-color: var(--disabled-text-color)
+            - transition: left 0.2s ease
+            - position: relative
+            - left: '-19px'
+        value: 'off'
+      - styles:
+          card:
+            - border: '3px solid #4CAF50'
+            - transition: border 0.2s ease
+          icon:
+            - color: white
+            - background-color: '#4CAF50'
+            - transition: left 0.2s ease
+            - position: relative
+            - left: 20px
+        value: 'on'
+      - styles:
+          card:
+            - border: '3px solid #F44336'
+            - transition: border 0.2s ease
+          icon:
+            - color: white
+            - background-color: '#F44336'
+            - transition: left 0.2s ease
+            - position: relative
+            - left: '-19px'
+        value: unavailable
+    styles:
+      card:
+        - width: 75px
+        - height: 37px
+        - border-radius: 500px
+        - box-shadow: none
+      icon:
+        - height: 25px
+        - width: 25px
+        - border-radius: 25px
+title: Button Configs
+views:
+  - title: Room View Light Button
+    path: test
+    badges: []
+    cards:
+      - type: grid
+          cards:
+            - type: 'custom:button-card'
+              entity: light.boat_light
+              template:
+                - hue_color_bulb
+                - view_bulb_uplight
+              variables:
+                custom_state_display: |
+                  [[[ 
+                    return " "
+                  ]]]
+              custom_fields:
+                power_icon:
+                  card:
+                    entity: light.boat_light
+                    type: 'custom:button-card'
+                    template: view_power_icon_layout
+                slider:
+                  card:
+                    entity: light.boat_light
+                    full_row: true
+                    toggle: false
+                    type: 'custom:slider-entity-row'
+            - type: 'custom:button-card'
+              entity: light.lounge_sidelight
+              template:
+                - hue_white_bulb
+                - view_bulb_uplight
+              variables:
+                custom_state_display: |
+                  [[[ 
+                    return " "
+                  ]]]
+              custom_fields:
+                power_icon:
+                  card:
+                    entity: light.lounge_sidelight
+                    type: 'custom:button-card'
+                    template: view_power_icon_layout
+                slider:
+                  card:
+                    entity: light.lounge_sidelight
+                    full_row: true
+                    toggle: false
+                    type: 'custom:slider-entity-row'
+            - type: 'custom:button-card'
+              entity: light.wled
+              template:
+                - hue_led_strip
+              variables:
+                custom_state_display: |
+                  [[[ 
+                    return " "
+                  ]]]
+              custom_fields:
+                power_icon:
+                  card:
+                    entity: light.wled
+                    type: 'custom:button-card'
+                    template: view_power_icon_layout
+                slider:
+                  card:
+                    entity: light.wled
+                    full_row: true
+                    toggle: false
+                    type: 'custom:slider-entity-row'
+            - type: 'custom:button-card'
+              entity: light.ikea_gu10_kitchen_light_1_light
+              template:
+                - hue_gu10_bulb
+                - view_gu10_downlight
+              variables:
+                custom_state_display: |
+                  [[[ 
+                    return " "
+                  ]]]
+              custom_fields:
+                power_icon:
+                  card:
+                    entity: light.ikea_gu10_kitchen_light_1_light
+                    type: 'custom:button-card'
+                    template: view_power_icon_layout
+                slider:
+                  card:
+                    entity: light.ikea_gu10_kitchen_light_1_light
+                    full_row: true
+                    toggle: false
+                    type: 'custom:slider-entity-row'
+          columns: 1
+          square: false
