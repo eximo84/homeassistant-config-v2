@@ -17,7 +17,9 @@ These mimic the default Home Assistant badges or HomeKit badges.  Providing subt
 * Name/Status/Label can be used to provide more information - here im using a template sensor to count lights on from a specific group then providing that to the button.
 * I use a heavily modified custom badge to display music information
 
-Standard button cards are setup in a 3 column grid. View button card is a 2 column grid.
+## Standard Button Cards 
+
+These are used on my main dashboard and tablet, they are styled similar to HomeKit butttons and are setup in a 3 column grid.
 
 ## Light Button
 
@@ -104,6 +106,10 @@ See main LoveLace Overview and look at the Music Tab for full setup - https://gi
 * Play/Pause icon overlayed cover art
 * Used in conjunction with Mini-Media Player allows for a dynamic playback interface
 
+## Room View Button Cards 
+
+Used within the Views Dashboard for individual rooms these cards are visual appealing and provide more-info on a tap action with a seperate power toggle to control the light/switch.  Lights and switches are used in 1 column grid, sensors are in 2 column grid and automation/scene buttons are used in a 3 column grid.
+
 ## Room View Light Button
 
 ![Room_View Light Button](https://user-images.githubusercontent.com/25502878/114790522-cdd92e00-9d7c-11eb-81f3-3c9e36de3de2.PNG)
@@ -114,7 +120,6 @@ Requires lovelace card Slider Entity Row - https://github.com/thomasloven/lovela
 * Bulbs icons illuminate correctly when on
 * Bulbs defined as uplight or downlight will be rotated (excludes LED Strip)
 * Used to display status of individual light entities
-* Used within the Views Dashboard for individual rooms
 * Slider for brightness control
 * Custom State Display support - default is blank
 * Last Changed Status
@@ -130,7 +135,7 @@ Requires lovelace card Slider Entity Row - https://github.com/thomasloven/lovela
 * Hue SVG icon support for Colour/White Ambience, White, GU10, LED Light Strips.
 * Bulbs icons illuminate correctly when on
 * Used to display status of individual light entity
-* Used within the Views Dashboard for individual rooms
+* Used in a 2 column grid
 * Slider for brightness control
 * Light status information
 * Seperate power toggle button
@@ -141,7 +146,6 @@ Requires lovelace card Slider Entity Row - https://github.com/thomasloven/lovela
 ![Room_View Switch Button](https://user-images.githubusercontent.com/25502878/114790530-d16cb500-9d7c-11eb-88ac-289d65291f08.PNG)
 
 * Used to display status of individual switch entities
-* Used within the Views Dashboard for individual rooms
 * Can override Name and Icon
 * Custom State Display support - default is blank
 * Last Changed Status
@@ -154,7 +158,6 @@ Requires lovelace card Slider Entity Row - https://github.com/thomasloven/lovela
 
 * Used to display status of individual sensor entities
 * Supported Sensors are Window, Door, Lux, Motion, Battery, Device
-* Used within the Views Dashboard for individual rooms
 * Can override Name, Icon, State Display
 * Custom additional state/attribute display - default shows battery status
 * Card colour shows red if entity battery is less than 5%
@@ -166,7 +169,6 @@ Requires lovelace card Slider Entity Row - https://github.com/thomasloven/lovela
 ![Room_View Automation_Scene Button](https://user-images.githubusercontent.com/25502878/114790531-d2054b80-9d7c-11eb-8b00-2414a8dbb9aa.PNG)
 
 * Used to display status of automations or to active scenes
-* Used within the Views Dashboard for individual rooms
 * Automation - Can override Name, Icon
 * Automation - Two colour choices, either icon colour or card colour
 * Automation - Status displayed as toggle switch
