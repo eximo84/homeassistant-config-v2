@@ -1,0 +1,188 @@
+button_card_templates:
+  sensor_device:
+    state:
+      - value: offline
+        styles:
+          card:
+            - background-color: '#F44336'
+          icon:
+            - color: white
+          name:
+            - color: white
+          state:
+            - color: white
+          label:
+            - color: white
+          custom_fields:
+            s2:
+              - color: white
+    styles:
+      icon:
+        - color: var(--state-icon-color)
+  sensor_lux:
+    state:
+      - operator: <=
+        value: 19
+        icon: 'mdi:brightness-4'
+        styles:
+          icon:
+            - color: var(--state-icon-color)
+      - operator: '>='
+        value: 20
+        icon: 'mdi:brightness-5'
+      - operator: '>='
+        value: 30
+        icon: 'mdi:brightness-6'
+      - operator: '>='
+        value: 40
+        icon: 'mdi:brightness-7'
+  sensor_battery:
+    icon: 'mdi:light-switch'
+    styles:
+      icon:
+        - color: var(--state-icon-color)
+    state:
+      - operator: <=
+        value: '5'
+        icon: 'mdi:battery-alert'
+        styles:
+          card:
+            - background-color: '#F44336'
+          icon:
+            - color: white
+          name:
+            - color: white
+          state:
+            - color: white
+          label:
+            - color: white
+          custom_fields:
+            s2:
+              - color: white
+  view_sensor_layout:
+    variables:
+      battery_level: '[[[ return entity.attributes.battery ]]]'
+    custom_fields:
+      s2: |
+        [[[
+          if (variables.custom_s2 != null) return variables.custom_s2;
+          else if (variables.battery_level == null) return " ";
+          else return "Battery: " + variables.battery_level + ' %';
+        ]]]
+    show_last_changed: true
+    show_state: true
+    state:
+      - operator: template
+        value: |
+          [[[
+             if (variables.battery_level <= 5) return "True";
+          ]]]
+        icon: 'mdi:battery-alert'
+        styles:
+          card:
+            - background-color: '#F44336'
+          icon:
+            - color: white
+          name:
+            - color: white
+          state:
+            - color: white
+          label:
+            - color: white
+          custom_fields:
+            s2:
+              - color: white
+    styles:
+      card:
+        - height: 150px
+      grid:
+        - grid-template-areas: '"i n" "i s" "i l" "i s2" '
+        - grid-template-columns: 45% 55%
+        - grid-template-rows: 1fr 15% 15% 30%
+      icon:
+        - width: 90%
+      label:
+        - justify-self: start
+        - font-size: 14px
+      name:
+        - font-weight: bold
+        - justify-self: start
+      state:
+        - justify-self: start
+        - font-size: 14px
+      custom_fields:
+        s2:
+          - justify-self: start
+          - font-size: 12px
+title: Button Configs
+views:
+  - title: Room View Sensor Button
+    path: test
+    badges: []
+    cards:   
+            - type: grid
+        cards:
+          - variables:
+              custom_s2: null
+            template: view_sensor_layout
+            entity: binary_sensor.0x00158d00045ee3ea_contact
+            name: Window
+            type: 'custom:button-card'
+          - variables:
+              custom_s2: null
+            template:
+              - view_sensor_layout
+              - sensor_lux
+            entity: sensor.esp_dev_03_bh1750_illuminance
+            name: Lux
+            type: 'custom:button-card'
+          - variables:
+              custom_s2: null
+            template: view_sensor_layout
+            entity: binary_sensor.bathroom_sensor_motion
+            name: Motion
+            type: 'custom:button-card'
+          - variables:
+              custom_s2: null
+            template: view_sensor_layout
+            entity: binary_sensor.0x00158d000420b592_contact
+            name: Door
+            type: 'custom:button-card'
+          - variables:
+              custom_s2: |
+                [[[ 
+                  return "Battery: " + entity.state +" %"
+                ]]]
+            template:
+              - view_sensor_layout
+              - sensor_battery
+            entity: sensor.downstairs_dimmer_switch_battery_level
+            name: Dimmer
+            type: 'custom:button-card'
+            state_display: Kitchen
+          - variables:
+              custom_s2: |
+                [[[ 
+                  return "Battery: " + entity.state +" %"
+                ]]]
+            template:
+              - view_sensor_layout
+              - sensor_battery
+            entity: sensor.landing_dimmer_switch_battery_level
+            name: Dimmer
+            type: 'custom:button-card'
+            state_display: Landing
+          - entity: sensor.zigbee2mqtt_bridge_state
+            variables:
+              custom_s2: |
+                [[[
+                  return "Version: " + states['sensor.zigbee2mqtt_version'].state;
+                ]]]
+            name: Zigbee
+            type: 'custom:button-card'
+            template:
+              - view_sensor_layout
+              - sensor_device
+            icon: 'mdi:zigbee'
+        columns: 2
+        square: false
