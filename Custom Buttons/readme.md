@@ -21,7 +21,7 @@ These mimic the default Home Assistant badges or HomeKit badges.  Providing subt
 
 These are used on my main dashboard and tablet, they are styled similar to HomeKit butttons and are setup in a 3 column grid.
 
-## Light Button
+### Light Button
 
 ![Light](https://user-images.githubusercontent.com/25502878/101266388-4df3e500-3746-11eb-8c1a-a94d53d3c118.PNG)
 
@@ -31,7 +31,7 @@ These are used on my main dashboard and tablet, they are styled similar to HomeK
 * Supports secondary information e.g. Window / Door Entity status
 * Supports temperature information
 
-## Switch Button
+### Switch Button
 
 ![Switch](https://user-images.githubusercontent.com/25502878/101266390-4e8c7b80-3746-11eb-82a8-e21d7452072c.PNG)
 
@@ -40,7 +40,7 @@ These are used on my main dashboard and tablet, they are styled similar to HomeK
 * Switch entity status is shown
 * Supports secondary information
 
-## Climate Button
+### Climate Button
 
 ![Climate](https://user-images.githubusercontent.com/25502878/101266386-4d5b4e80-3746-11eb-866c-8f8d77d835c5.PNG)
 
@@ -52,7 +52,7 @@ These are used on my main dashboard and tablet, they are styled similar to HomeK
 * Icon "should" change depending on heating mode - not working at the moment
 * Custom Icons for Tado System
 
-## Dual Button
+### Dual Button
 
 ![Dual Button](https://user-images.githubusercontent.com/25502878/113473576-38779900-9462-11eb-9114-64efcc8e4f9f.PNG)
 
@@ -61,7 +61,7 @@ These are used on my main dashboard and tablet, they are styled similar to HomeK
 * Button shows more-info for entity by default but can easily be adapted to peform different actions
 * Adjust width of the grid columns to allow longer names/states
 
-## Garbage Button
+### Garbage Button
 
 ![Garbage](https://user-images.githubusercontent.com/25502878/101266387-4df3e500-3746-11eb-8550-8a70817d4e6b.PNG)
 
@@ -73,7 +73,7 @@ Requires custom component Garbage Collection: https://github.com/bruxy70/Garbage
 * Secondary information displays collection due days of both types
 * Very custom code (lots of IF statements)
 
-## Animated Button
+### Animated Button
 
 ![Animated](https://user-images.githubusercontent.com/25502878/101266385-4d5b4e80-3746-11eb-8830-53d01766927c.PNG)
 
@@ -83,7 +83,7 @@ Requires custom component Garbage Collection: https://github.com/bruxy70/Garbage
 * Supports secondary information
 * Icon is animated - example used is a Fan
 
-## Weather Button
+### Weather Button
 
 ![Weather](https://user-images.githubusercontent.com/25502878/101266546-847e2f80-3747-11eb-8755-39dc5d2528c0.PNG)
 
@@ -92,7 +92,7 @@ Requires custom component Garbage Collection: https://github.com/bruxy70/Garbage
 * Icons change based on weather - mostly hard coded based on entity state
 * Supports secondary information such as Preciptation
 
-## Music Playback
+### Music Playback
 
 ![Music](https://user-images.githubusercontent.com/25502878/101266389-4df3e500-3746-11eb-805c-87c8727a3956.PNG)
 
@@ -110,7 +110,7 @@ See main LoveLace Overview and look at the Music Tab for full setup - https://gi
 
 Used within the Views Dashboard for individual rooms these cards are visual appealing and provide more-info on a tap action with a seperate power toggle to control the light/switch.  Lights and switches are used in 1 column grid, sensors are in 2 column grid and automation/scene buttons are used in a 3 column grid.
 
-## Room View Light Button
+### Room View Light Button
 
 ![Room_View Light Button](https://user-images.githubusercontent.com/25502878/114790522-cdd92e00-9d7c-11eb-81f3-3c9e36de3de2.PNG)
 
@@ -126,7 +126,7 @@ Requires lovelace card Slider Entity Row - https://github.com/thomasloven/lovela
 * Seperate power toggle button to switch on/off entity
 * Tap of card brings up More-Info dialog
 
-## Room View Light Button - Old Style
+### Room View Light Button - Old Style
 
 ![Room View Light Button - Old Style](https://user-images.githubusercontent.com/25502878/101266384-4cc2b800-3746-11eb-9d7f-cadb77f1ed93.PNG)
 
@@ -141,7 +141,7 @@ Requires lovelace card Slider Entity Row - https://github.com/thomasloven/lovela
 * Seperate power toggle button
 * Tap of button brings up More-Info dialog
 
-## Room View Switch Button
+### Room View Switch Button
 
 ![Room_View Switch Button](https://user-images.githubusercontent.com/25502878/114790530-d16cb500-9d7c-11eb-88ac-289d65291f08.PNG)
 
@@ -152,7 +152,7 @@ Requires lovelace card Slider Entity Row - https://github.com/thomasloven/lovela
 * Seperate power toggle button to switch on/off entity
 * Tap of card brings up More-Info dialog
 
-## Room View Sensor Button
+### Room View Sensor Button
 
 ![Room_View Sensor Button](https://user-images.githubusercontent.com/25502878/114790526-d03b8800-9d7c-11eb-8a95-31b38462cfb4.PNG)
 
@@ -164,7 +164,7 @@ Requires lovelace card Slider Entity Row - https://github.com/thomasloven/lovela
 * Last Changed Status
 * Tap of card brings up More-Info dialog
 
-## Room Automation & Scene Button
+### Room Automation & Scene Button
 
 ![Room_View Automation_Scene Button](https://user-images.githubusercontent.com/25502878/114790531-d2054b80-9d7c-11eb-8b00-2414a8dbb9aa.PNG)
 
