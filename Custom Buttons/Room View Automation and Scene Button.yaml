@@ -1,0 +1,121 @@
+button_card_templates:
+  view_automation_scene_card_color:
+    color_type: card
+    state:
+      - value: 'on'
+        styles:
+          custom_fields:
+            card_type:
+              - color: white
+          state:
+            - fill: white
+      - value: 'off'
+        styles:
+          name:
+            - color: var(--state-icon-color)
+          icon:
+            - color: var(--state-icon-color)
+          state:
+            - fill: var(--state-icon-color)
+  view_automation_scene_icon_color:
+    color_type: icon
+    state:
+      - value: 'on'
+        styles:
+          state:
+            - fill: '#4CAF50'
+      - value: 'off'
+        styles:
+          name:
+            - color: var(--state-icon-color)
+          state:
+            - fill: var(--state-icon-color)
+  view_scene_button:
+    custom_fields:
+      card_type: |
+        [[[ return `<ha-icon icon="mdi:palette"></ha-icon>` ]]]
+    show_state: false
+    template: view_automation_scene_layout
+    styles:
+      icon:
+        - color: var(--state-icon-color)
+  view_automation_button:
+    custom_fields:
+      card_type: |
+        [[[ return `<ha-icon icon="mdi:robot"></ha-icon>` ]]]
+    show_state: true
+    template: view_automation_scene_layout
+  view_automation_scene_layout:
+    state_display: |
+      [[[
+        if (entity.state == 'on') return `<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M6 18h12c3.311 0 6-2.689 6-6s-2.689-6-6-6h-12.039c-3.293.021-5.961 2.701-5.961 6 0 3.311 2.688 6 6 6zm0-10h12c2.208 0 4 1.792 4 4s-1.792 4-4 4h-12c-2.208 0-4-1.792-4-4 0-2.199 1.778-3.986 3.974-4h.026zm12 1c-1.656 0-3 1.344-3 3s1.344 3 3 3 3-1.344 3-3-1.344-3-3-3z"/></svg>`;
+        else if (entity.state == 'off') return `<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M18 18h-12c-3.311 0-6-2.689-6-6s2.689-6 6-6h12.039c3.293.021 5.961 2.701 5.961 6 0 3.311-2.688 6-6 6zm0-10h-12c-2.208 0-4 1.792-4 4s1.792 4 4 4h12c2.208 0 4-1.792 4-4 0-2.199-1.778-3.986-3.974-4h-.026zm-12 1c1.656 0 3 1.344 3 3s-1.344 3-3 3-3-1.344-3-3 1.344-3 3-3z"/></svg>`;
+        else return `<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M18 18h-12c-3.311 0-6-2.689-6-6s2.689-6 6-6h12.039c3.293.021 5.961 2.701 5.961 6 0 3.311-2.688 6-6 6zm0-10h-12c-2.208 0-4 1.792-4 4s1.792 4 4 4h12c2.208 0 4-1.792 4-4 0-2.199-1.778-3.986-3.974-4h-.026zm-6 1c1.656 0 3 1.344 3 3s-1.344 3-3 3-3-1.344-3-3 1.344-3 3-3z"/></svg>`;
+      ]]]
+    styles:
+      card:
+        - height: 150px
+      custom_fields:
+        card_type:
+          - position: absolute
+          - top: 5%
+          - left: 5%
+          - width: 15%
+          - color: var(--state-icon-color)
+      grid:
+        - grid-template-areas: '"i" "n" "s"'
+        - grid-template-columns: 100%
+        - grid-template-rows: 48% 28% 24%
+      icon:
+        - width: 50%
+      label:
+        - justify-self: start
+        - font-size: 14px
+      name:
+        - font-weight: bold
+        - justify-self: center
+      state:
+        - justify-self: center
+        - margin: 0% 0% 0% 0%
+        - transform: scale(1.8)
+title: Button Configs
+views:
+  - title: Room View Automation and Scene Button
+    path: test
+    badges: []
+    cards:  
+            - type: grid
+        cards:
+          - entity: automation.kodi_movie_lights
+            template:
+              - view_automation_button
+              - view_automation_scene_icon_color
+            type: 'custom:button-card'
+            name: Movie Lights
+            icon: 'mdi:movie-open'
+          - entity: automation.kodi_movie_lights
+            template:
+              - view_automation_button
+              - view_automation_scene_card_color
+            type: 'custom:button-card'
+            name: Movie Lights
+            icon: 'mdi:movie-open'
+          - template:
+              - view_scene_button
+              - view_automation_scene_card_color
+            type: 'custom:button-card'
+            name: Virtual Reality
+            icon: 'mdi:hololens'
+            styles:
+              card:
+                - background: 'rgb(254,227,161)'
+                - background: >-
+                    linear-gradient(45deg, rgba(254,227,161,1) 0%,
+                    rgba(255,255,255,1) 100%)
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.office_vr
+        columns: 3
+        square: false
