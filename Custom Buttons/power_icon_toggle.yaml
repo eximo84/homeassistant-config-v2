@@ -1,0 +1,49 @@
+button_card_templates:
+  view_power_icon_layout:
+    icon: 'mdi:power'
+    show_name: false
+    show_state: false
+    state:
+      - styles:
+          card:
+            - border: 1px solid var(--disabled-text-color)
+            - transition: border 0.2s ease
+          icon:
+            - color: var(--primary-text-color)
+            - background-color: var(--disabled-text-color)
+            - transition: left 0.2s ease
+            - position: relative
+            - left: '-19px'
+        value: 'off'
+      - styles:
+          card:
+            - border: '1px solid #4CAF50'
+            - transition: border 0.2s ease
+          icon:
+            - color: white
+            - background-color: '#4CAF50'
+            - transition: left 0.2s ease
+            - position: relative
+            - left: 20px
+        value: 'on'
+      - styles:
+          card:
+            - border: '1px solid #F44336'
+            - transition: border 0.2s ease
+          icon:
+            - color: white
+            - background-color: '#F44336'
+            - transition: left 0.2s ease
+            - position: relative
+            - left: '-19px'
+        value: unavailable
+    styles:
+      card:
+        - width: 75px
+        - height: 35px
+        - border-radius: 500px
+        - box-shadow: none
+      icon:
+        - height: 28px
+        - width: 28px
+        - border-radius: 100%
