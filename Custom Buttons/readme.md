@@ -104,9 +104,26 @@ See main LoveLace Overview and look at the Music Tab for full setup - https://gi
 * Play/Pause icon overlayed cover art
 * Used in conjunction with Mini-Media Player allows for a dynamic playback interface
 
-## View Light Button
+## Room View Light Button
 
-![View Light Button](https://user-images.githubusercontent.com/25502878/101266384-4cc2b800-3746-11eb-9d7f-cadb77f1ed93.PNG)
+![Room_View Light Button](https://user-images.githubusercontent.com/25502878/114790522-cdd92e00-9d7c-11eb-81f3-3c9e36de3de2.PNG)
+
+Requires lovelace card Slider Entity Row - https://github.com/thomasloven/lovelace-slider-entity-row
+
+* Hue SVG icon support for Colour/White Ambience, White, GU10, LED Light Strips.
+* Bulbs icons illuminate correctly when on
+* Bulbs defined as uplight or downlight will be rotated (excludes LED Strip)
+* Used to display status of individual light entities
+* Used within the Views Dashboard for individual rooms
+* Slider for brightness control
+* Custom State Display support - default is blank
+* Last Changed Status
+* Seperate power toggle button to switch on/off entity
+* Tap of card brings up More-Info dialog
+
+## Room View Light Button - Old Style
+
+![Room View Light Button - Old Style](https://user-images.githubusercontent.com/25502878/101266384-4cc2b800-3746-11eb-9d7f-cadb77f1ed93.PNG)
 
 Requires lovelace card Slider Entity Row - https://github.com/thomasloven/lovelace-slider-entity-row
 
@@ -118,4 +135,43 @@ Requires lovelace card Slider Entity Row - https://github.com/thomasloven/lovela
 * Light status information
 * Seperate power toggle button
 * Tap of button brings up More-Info dialog
+
+## Room View Switch Button
+
+![Room_View Switch Button](https://user-images.githubusercontent.com/25502878/114790530-d16cb500-9d7c-11eb-88ac-289d65291f08.PNG)
+
+* Used to display status of individual switch entities
+* Used within the Views Dashboard for individual rooms
+* Can override Name and Icon
+* Custom State Display support - default is blank
+* Last Changed Status
+* Seperate power toggle button to switch on/off entity
+* Tap of card brings up More-Info dialog
+
+## Room View Sensor Button
+
+![Room_View Sensor Button](https://user-images.githubusercontent.com/25502878/114790526-d03b8800-9d7c-11eb-8a95-31b38462cfb4.PNG)
+
+* Used to display status of individual sensor entities
+* Supported Sensors are Window, Door, Lux, Motion, Battery, Device
+* Used within the Views Dashboard for individual rooms
+* Can override Name, Icon, State Display
+* Custom additional state/attribute display - default shows battery status
+* Card colour shows red if entity battery is less than 5%
+* Last Changed Status
+* Tap of card brings up More-Info dialog
+
+## Room Automation & Scene Button
+
+![Room_View Automation_Scene Button](https://user-images.githubusercontent.com/25502878/114790531-d2054b80-9d7c-11eb-8b00-2414a8dbb9aa.PNG)
+
+* Used to display status of automations or to active scenes
+* Used within the Views Dashboard for individual rooms
+* Automation - Can override Name, Icon
+* Automation - Two colour choices, either icon colour or card colour
+* Automation - Status displayed as toggle switch
+* Automation - Tap of card toggles entity
+* Scene - Name, Icon and Background Colour must be configured per card
+* Scene - Tap Action set to call-service but can be customised
+* Scene - Name, Icon colour might become washed out or hard to see if background colour set to similar
 
